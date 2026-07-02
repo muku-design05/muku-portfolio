@@ -7,3 +7,10 @@ Description: Personal portfolio theme created from scratch.
 Version: 1.0.0
 Text Domain: mukuportfolio
 */
+body {
+    padding-top: 72px;
+}
+
+.menu-close {
+    display: none;
+}

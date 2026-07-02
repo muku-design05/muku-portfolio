@@ -15,7 +15,7 @@
 
 <header class="header">
 
-    <div class="container">
+    <div class="container header__inner">
 
         <!-- ロゴ -->
         <a href="#top" class="logo">
@@ -24,7 +24,7 @@
 
         <!-- ナビゲーション -->
         <nav class="header-nav">
-
+           
             <ul>
 
                 <li><a href="#top">Top</a></li>
@@ -40,12 +40,10 @@
         </nav>
 
         <!-- ハンバーガーボタン -->
-        <button class="hamburger" aria-label="メニューを開く">
-
+        <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-
         </button>
 
     </div>
