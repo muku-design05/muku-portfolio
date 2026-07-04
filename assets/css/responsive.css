@@ -21,7 +21,7 @@
         font-size: 22px;
         line-height: 1;
     }
-
+ /* ===== Header ===== */
     .header-nav {
     position: fixed;
     top: 0;
@@ -98,5 +98,70 @@
 
     .hamburger span {
     transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+     /* ===== Hero ===== */
+
+     .hero {
+        min-height: 420px;
+    }
+
+    .hero__bg {
+        background-position: center;
+        background-size: cover;
+    }
+
+    .hero__inner {
+        min-height: 420px;
+    }
+
+    .hero__content {
+        top: 70px;
+        left: 12px;
+    }
+
+    .hero__label {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .hero__title {
+    font-size: 58px;
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+    .hero__text {
+        margin-top: 18px;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .hero__visual {
+        position: absolute;
+        right: 0px;
+        width: 180px;
+        height: 150px;
+    }
+
+    .hero__metal {
+    width: 95px;
+    height: 70px;
+    }
+
+    .hero__glass {
+    width: 120px;
+    height: 92px;
+    }
+
+    .hero__scroll {
+        bottom: -42px;
+    }
+
+    .hero__scroll span {
+        border-left-width: 12px;
+        border-right-width: 12px;
+        border-top-width: 12px;
     }
 }

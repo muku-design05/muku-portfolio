@@ -1,6 +1,12 @@
 <?php
 
 function mukuportfolio_enqueue_styles() {
+    wp_enqueue_style(
+    'google-fonts',
+    'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
+    array(),
+    null
+    );
 
     wp_enqueue_style(
         'reset',

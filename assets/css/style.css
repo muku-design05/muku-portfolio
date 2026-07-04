@@ -77,3 +77,169 @@ body {
 .hamburger {
     display: none;
 }
+
+
+
+/* =========================
+   Hero
+========================= */
+
+.hero {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    overflow: hidden;
+    background: #fff;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/hero-bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    animation: hero-bg-float 10s ease-in-out infinite alternate;
+}
+
+.hero__inner {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 72px);
+}
+
+.hero__content {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    z-index: 2;
+}
+
+.hero__label {
+    margin-bottom: 28px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.hero__title {
+    font-size: clamp(72px, 8vw, 128px);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.hero__text {
+    margin-top: 55px;
+    max-width: 480px;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.hero__visual {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    width: 360px;
+    height: 320px;
+    transform: translateY(-50%);
+}
+
+.hero__metal {
+    width: 220px;
+    height: 160px;
+    border-radius: 52% 48% 58% 42% / 45% 55% 42% 58%;
+    background: linear-gradient(
+        135deg,
+        #f4f4f4,
+        #d6d6d6,
+        #fafafa
+    );
+    opacity: .7;
+}
+
+.hero__glass {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 220px;
+    height: 180px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,.08),
+        inset 0 1px 1px rgba(255,255,255,.5);
+
+    border-radius: 45% 55% 50% 50% /
+                   55% 45% 55% 45%;
+}
+
+.hero__glass::before {
+    content: "";
+    position: absolute;
+
+    top: 18px;
+    left: 22px;
+
+    width: 60px;
+    height: 10px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.45);
+
+    filter: blur(4px);
+
+    transform: rotate(-18deg);
+}
+
+.hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 56px;
+    transform: translateX(-50%);
+}
+
+.hero__scroll span {
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid #565656;
+}
+
+@keyframes metallic-float {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(0, -10px);
+    }
+}
+
+@keyframes glass-float {
+    from {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    to {
+        transform: translate(6px, -8px) rotate(3deg);
+    }
+}
+
+@keyframes hero-bg-float {
+    from {
+        transform: translate(0, 0) scale(1.02);
+    }
+
+    to {
+        transform: translate(12px, -8px) scale(1.06);
+    }
+}
