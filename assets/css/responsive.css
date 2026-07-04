@@ -164,4 +164,44 @@
         border-right-width: 12px;
         border-top-width: 12px;
     }
+
+    /* =========================
+        Works
+    ========================= */
+    .works-category {
+    display: none;
+    }
+
+    .works {
+    padding: 72px 0;
+    }
+
+    .section-title {
+    margin-bottom: 50px;
+    padding: 6px 18px;
+    font-size: 28px;
+    }
+
+    .works-pickup {
+    gap: 12px;
+    }
+
+    .work-card__image {
+    aspect-ratio: 1 / 1;
+    font-size: 24px;
+    }
+
+    .works-link {
+    margin-top: 24px;
+    text-align: center;
+    }
+
+    .works-link a {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #565656;
+    font-size: 14px;
+    }
+
+    
 }

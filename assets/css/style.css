@@ -243,3 +243,132 @@ body {
         transform: translate(12px, -8px) scale(1.06);
     }
 }
+
+/* =========================
+   Works
+========================= */
+
+.works {
+    padding: 120px 0;
+}
+
+.works .container {
+    text-align: center;
+}
+
+
+/* ===== Section Title ===== */
+
+.section-title {
+    display: inline-block;
+    margin: 0 auto 30px;
+    padding: 8px 24px;
+    background: #1A1A1A;
+    color: #fff;
+    font-size: 70px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* ===== Category ===== */
+.works-category {
+    margin-bottom: 50px;
+}
+
+.works-category ul {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+}
+
+.works-category a {
+    display: inline-block;
+    padding: 4px 14px;
+    color: #1A1A1A;
+    font-size: 35px;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.works-category a:hover {
+    background-color: var(--color-hover);
+    color: #fff;
+}
+
+
+/* ===== Works Grid ===== */
+
+.works-pickup {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+
+/* ===== Work Card ===== */
+
+.work-card {
+    display: block;
+}
+
+.work-card__image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #E8E9E3;
+    color: #565656;
+    font-size: 42px;
+    font-weight: 500;
+    box-shadow: 0 5px 9.8px rgba(0, 0, 0, 0.06);
+    transition: color 0.3s ease;
+}
+
+.work-card__image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.work-card__image span {
+    position: relative;
+    z-index: 1;
+}
+
+.work-card:hover .work-card__image::before {
+    opacity: 1;
+}
+
+.work-card:hover .work-card__image {
+    color: #fff;
+}
+
+
+/* ===== View All Works ===== */
+
+.works-link {
+    margin-top: 48px;
+    text-align: right;
+}
+
+.works-link a {
+    display: inline-block;
+    padding: 4px 14px;
+    color: #1A1A1A;
+    font-size: 35px;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.works-link a:hover {
+    background-color: var(--color-hover);
+    color: #fff;
+}

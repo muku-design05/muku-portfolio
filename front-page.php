@@ -33,6 +33,53 @@
         </div>
     </section>
 
+    <section id="works" class="works">
+        <div class="container">
+
+            <h2 class="section-title">Works</h2>
+
+            <nav class="works-category" aria-label="作品カテゴリー">
+                <ul>
+                    <li><a href="#works-web">WEB</a></li>
+                    <li><a href="#works-banner">BANNER</a></li>
+                    <li><a href="#works-graphic">GRAPHIC</a></li>
+                    <li><a href="#works-video">VIDEO</a></li>
+                </ul>
+            </nav>
+
+            <div class="works-pickup">
+                <a href="#" class="work-card">
+                    <div class="work-card__image">
+                        <span>WEB</span>
+                    </div>
+                </a>
+
+                <a href="#" class="work-card">
+                    <div class="work-card__image">
+                        <span>BANNER</span>
+                    </div>
+                </a>
+
+                <a href="#" class="work-card">
+                    <div class="work-card__image">
+                        <span>GRAPHIC</span>
+                    </div>
+                </a>
+
+                <a href="#" class="work-card">
+                    <div class="work-card__image">
+                        <span>VIDEO</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="works-link">
+                <a href="#">View all works →</a>
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
 <?php get_footer(); ?>
