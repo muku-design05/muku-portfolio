@@ -203,5 +203,103 @@
     font-size: 14px;
     }
 
-    
+
+ /* =========================
+   About
+========================= */
+
+.about {
+    padding: 0 0 72px;
+}
+
+.about__body {
+    margin-top: 0;
+}
+
+.about-block__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.about-block__title::before {
+    content: "✦";
+    flex-shrink: 0;
+    width: 25px;
+    margin-right: 6px;
+    font-size: 25px;
+    line-height: 1;
+    text-align: center;
+}
+
+.about-block__content {
+    padding: 12px 31px;
+    background: rgba(255, 255, 255, 0.86);
+}
+
+.about-block--profile {
+    margin-bottom: 36px;
+}
+
+.about__name {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.about__name span {
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+.about__text {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.about__grid {
+    display: block;
+    margin-bottom: 36px;
+}
+
+.about__side {
+    display: block;
+}
+
+.about__grid > .about-block,
+.about__side .about-block {
+    margin-bottom: 36px;
+}
+
+.about__experience + .about__experience {
+    margin-top: 28px;
+}
+
+.about__experience p,
+.about-list li,
+.about-tools li {
+    margin-bottom: 8px;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.about-tools {
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 32px;
+}
+
+.explorations {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.exploration-card__image {
+    aspect-ratio: 1 / 1;
+}
+
+.exploration-card p {
+    margin-top: 6px;
+    font-size: 12px;
+}
 }

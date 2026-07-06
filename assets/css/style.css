@@ -1,15 +1,26 @@
 /* =========================
    Color
 ========================= */
+
 :root {
     --color-hover: #3A3A3A;
     --color-border: #565656;
     --color-surface-dark: #1A1A1A;
-
     --color-white: #FFFFFF;
     --color-black: #111111;
 }
-/* =========================*/
+
+
+/* =========================
+   Base
+========================= */
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     padding-top: 72px;
     font-family: "Inter", sans-serif;
@@ -17,12 +28,20 @@ body {
     background: #fff;
 }
 
+main {
+    width: 100%;
+}
+
 .container {
     width: min(100% - 48px, 1200px);
     margin: 0 auto;
 }
 
-/* Header */
+
+/* =========================
+   Header
+========================= */
+
 .header {
     position: fixed;
     top: 0;
@@ -79,6 +98,20 @@ body {
 }
 
 
+/* =========================
+   Common Section Background
+========================= */
+
+.works,
+.about {
+    width: 100%;
+    background-color: #fff;
+    background-image:
+        linear-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 26, 26, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
 
 /* =========================
    Hero
@@ -86,6 +119,7 @@ body {
 
 .hero {
     position: relative;
+    width: 100%;
     min-height: calc(100vh - 72px);
     overflow: hidden;
     background: #fff;
@@ -93,7 +127,7 @@ body {
 
 .hero__bg {
     position: absolute;
-    inset: 0;
+    inset: -32px;
     background-image: url("../images/hero-bg.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -144,57 +178,44 @@ body {
 }
 
 .hero__metal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
     width: 220px;
     height: 160px;
     border-radius: 52% 48% 58% 42% / 45% 55% 42% 58%;
-    background: linear-gradient(
-        135deg,
-        #f4f4f4,
-        #d6d6d6,
-        #fafafa
-    );
-    opacity: .7;
+    background: linear-gradient(135deg, #f4f4f4, #d6d6d6, #fafafa);
+    opacity: 0.7;
 }
 
 .hero__glass {
     position: absolute;
     right: 0;
     bottom: 0;
-
+    z-index: 1;
     width: 220px;
     height: 180px;
-
     background: rgba(255, 255, 255, 0.12);
-
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-
     border: 1px solid rgba(255, 255, 255, 0.35);
-
     box-shadow:
-        0 8px 32px rgba(0,0,0,.08),
-        inset 0 1px 1px rgba(255,255,255,.5);
-
-    border-radius: 45% 55% 50% 50% /
-                   55% 45% 55% 45%;
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
 }
 
 .hero__glass::before {
     content: "";
     position: absolute;
-
     top: 18px;
     left: 22px;
-
     width: 60px;
     height: 10px;
-
     border-radius: 999px;
-
-    background: rgba(255,255,255,.45);
-
+    background: rgba(255, 255, 255, 0.45);
     filter: blur(4px);
-
     transform: rotate(-18deg);
 }
 
@@ -214,26 +235,6 @@ body {
     border-top: 14px solid #565656;
 }
 
-@keyframes metallic-float {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(0, -10px);
-    }
-}
-
-@keyframes glass-float {
-    from {
-        transform: translate(0, 0) rotate(0deg);
-    }
-
-    to {
-        transform: translate(6px, -8px) rotate(3deg);
-    }
-}
-
 @keyframes hero-bg-float {
     from {
         transform: translate(0, 0) scale(1.02);
@@ -243,6 +244,7 @@ body {
         transform: translate(12px, -8px) scale(1.06);
     }
 }
+
 
 /* =========================
    Works
@@ -256,9 +258,6 @@ body {
     text-align: center;
 }
 
-
-/* ===== Section Title ===== */
-
 .section-title {
     display: inline-block;
     margin: 0 auto 30px;
@@ -270,8 +269,6 @@ body {
     line-height: 1;
 }
 
-
-/* ===== Category ===== */
 .works-category {
     margin-bottom: 50px;
 }
@@ -287,9 +284,7 @@ body {
     padding: 4px 14px;
     color: #1A1A1A;
     font-size: 35px;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .works-category a:hover {
@@ -297,17 +292,12 @@ body {
     color: #fff;
 }
 
-
-/* ===== Works Grid ===== */
-
 .works-pickup {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
+    width: 100%;
 }
-
-
-/* ===== Work Card ===== */
 
 .work-card {
     display: block;
@@ -350,9 +340,6 @@ body {
     color: #fff;
 }
 
-
-/* ===== View All Works ===== */
-
 .works-link {
     margin-top: 48px;
     text-align: right;
@@ -363,12 +350,145 @@ body {
     padding: 4px 14px;
     color: #1A1A1A;
     font-size: 35px;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .works-link a:hover {
     background-color: var(--color-hover);
     color: #fff;
+}
+
+
+/* =========================
+   About
+========================= */
+
+.about {
+    padding: 120px 0;
+}
+
+.about .container {
+    text-align: center;
+}
+
+.about__body {
+    margin-top: 40px;
+    text-align: left;
+}
+
+
+/* ===== About Block ===== */
+
+.about-block__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.about-block__title::before {
+    content: "✦";
+    flex-shrink: 0;
+    width: 30px;
+    margin-right: 8px;
+    font-size: 30px;
+    line-height: 1;
+    text-align: center;
+}
+
+
+/* ===== Content Background ===== */
+
+.about-block__content {
+    padding:
+        20px
+        22px
+        20px
+        38px;
+
+    background: rgba(255, 255, 255, 0.86);
+}
+
+
+/* ===== About Me ===== */
+
+.about-block--profile {
+    margin-bottom: 50px;
+}
+
+.about__name {
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.about__name span {
+    margin-left: 12px;
+    font-size: 30px;
+}
+
+.about__text {
+    font-size: 20px;
+    line-height: 2;
+}
+
+
+/* ===== Experience / Strength / Tools ===== */
+
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 50px;
+}
+
+.about__side {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.about__experience + .about__experience {
+    margin-top: 48px;
+}
+
+.about__experience p,
+.about-list li,
+.about-tools li {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+
+/* ===== Tools ===== */
+
+.about-tools {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 48px;
+}
+
+
+/* ===== Explorations ===== */
+
+.explorations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+}
+
+.exploration-card {
+    display: block;
+    color: #1A1A1A;
+}
+
+.exploration-card__image {
+    aspect-ratio: 16 / 10;
+    background: #E8E9E3;
+}
+
+.exploration-card p {
+    margin-top: 10px;
+    font-size: 20px;
 }
