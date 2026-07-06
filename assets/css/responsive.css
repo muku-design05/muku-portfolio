@@ -302,4 +302,36 @@
     margin-top: 6px;
     font-size: 12px;
 }
+
+
+/* =========================
+   Contact
+========================= */
+
+.contact {
+    padding: 0 0 72px;
+}
+
+.contact__text {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.contact__mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 16px;
+}
+
+.contact__mail::after {
+    content: "→";
+    font-size: 18px;
+}
+
+.contact__icon {
+    font-size: 28px;
+}
 }

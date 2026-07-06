@@ -26,6 +26,11 @@ body {
     font-family: "Inter", sans-serif;
     color: #111;
     background: #fff;
+     background-color: #fff;
+    background-image:
+        linear-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 26, 26, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
 }
 
 main {
@@ -98,19 +103,6 @@ main {
 }
 
 
-/* =========================
-   Common Section Background
-========================= */
-
-.works,
-.about {
-    width: 100%;
-    background-color: #fff;
-    background-image:
-        linear-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 26, 26, 0.08) 1px, transparent 1px);
-    background-size: 32px 32px;
-}
 
 
 /* =========================
@@ -491,4 +483,46 @@ main {
 .exploration-card p {
     margin-top: 10px;
     font-size: 20px;
+}
+
+
+/* =========================
+   Contact
+========================= */
+
+.contact {
+    padding: 120px 0;
+    text-align: center;
+}
+
+.contact__text {
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+.contact__mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 12px;
+    color: #1A1A1A;
+    font-size: 28px;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.contact__mail:hover {
+    background-color: var(--color-hover);
+    color: #fff;
+}
+
+.contact__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 40px;
 }

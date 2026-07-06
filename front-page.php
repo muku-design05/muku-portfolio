@@ -194,6 +194,21 @@
     </div>
 </section>
 
+<section id="contact" class="contact">
+    <div class="container">
+
+        <h2 class="section-title">Contact</h2>
+
+        <p class="contact__text">Let's work together.</p>
+
+        <a href="mailto:anbo.muku@gmail.com" class="contact__mail">
+            <span class="contact__icon">✉</span>
+            <span>anbo.muku@gmail.com</span>
+        </a>
+
+    </div>
+</section>
+
 </main>
 
 <?php get_footer(); ?>
