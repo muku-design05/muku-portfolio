@@ -526,3 +526,39 @@ main {
     border-radius: 4px;
     font-size: 40px;
 }
+
+
+/* =========================
+   Footer
+========================= */
+
+.footer {
+    padding: 40px 0;
+    background: var(--color-surface-dark);
+}
+
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__copy {
+    color: var(--color-white);
+    font-size: 16px;
+    letter-spacing: 0.04em;
+}
+
+.footer__github {
+    display: inline-block;
+    padding: 4px 10px;
+    color: var(--color-white);
+    font-size: 18px;
+    transition:
+        background-color .3s ease,
+        color .3s ease;
+}
+
+.footer__github:hover {
+    background: var(--color-hover);
+}

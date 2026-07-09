@@ -334,4 +334,26 @@
 .contact__icon {
     font-size: 28px;
 }
+
+/* =========================
+   Footer
+========================= */
+
+.footer {
+    padding: 28px 0;
+}
+
+.footer__inner {
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer__copy {
+    font-size: 12px;
+}
+
+.footer__github {
+    font-size: 16px;
+}
+
 }
