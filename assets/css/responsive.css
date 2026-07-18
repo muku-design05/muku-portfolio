@@ -356,4 +356,124 @@
     font-size: 16px;
 }
 
+
+/* =========================
+   Back to Top
+========================= */
+
+.back-to-top {
+    right: 16px;
+    bottom: 16px;
+
+    width: 48px;
+    height: 48px;
+
+    font-size: 20px;
+}
+
+
+/* =========================
+   Works Archive
+========================= */
+
+.works-archive {
+    padding: 72px 0;
+}
+
+
+/* ===== Category Navigation ===== */
+
+.works-archive__hero {
+    overflow: hidden;
+}
+
+.works-archive__categories {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin: 0px -16px 50px;
+    padding: 0 16px 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.works-archive__categories::-webkit-scrollbar {
+    display: none;
+}
+
+.works-archive__categories a {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border: 1px solid var(--color-border);
+    font-size: 20px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* ===== Works Group ===== */
+
+.works-group {
+    scroll-margin-top: 96px;
+}
+
+.works-group + .works-group {
+    margin-top: 80px;
+}
+
+.works-group__title {
+    gap: 8px;
+    margin-bottom: 28px;
+    font-size: 40px;
+}
+
+.works-group__title::before,
+.works-group__title::after {
+    font-size: 25px;
+}
+
+
+/* ===== Works Grid ===== */
+
+.works-archive__grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+}
+
+
+/* ===== Works Item ===== */
+
+.works-item__thumbnail {
+    aspect-ratio: 1 / 1;
+}
+
+.works-item__info {
+    margin-top: 12px;
+}
+
+.works-item__year {
+    margin-bottom: 2px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.works-item__title {
+    margin-bottom: 2px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.works-item__role {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.works-group__empty {
+    padding: 24px 0;
+    font-size: 14px;
+}
+
+
 }

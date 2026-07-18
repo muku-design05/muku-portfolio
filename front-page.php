@@ -210,28 +210,7 @@
 </section>
 
 
-<footer class="footer">
-    <div class="container">
 
-        <div class="footer__inner">
-
-            <p class="footer__copy">
-                ©2026 Muku Anbo
-            </p>
-
-            <a
-                href="https://github.com/muku-design05"
-                class="footer__github"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                GitHub →
-            </a>
-
-        </div>
-
-    </div>
-</footer>
 
 </main>
 

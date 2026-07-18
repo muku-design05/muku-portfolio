@@ -39,3 +39,88 @@ function mukuportfolio_enqueue_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'mukuportfolio_enqueue_scripts');
+
+/* =========================
+   Theme Support
+========================= */
+
+function mukuportfolio_theme_setup() {
+    add_theme_support('post-thumbnails');
+}
+
+add_action('after_setup_theme', 'mukuportfolio_theme_setup');
+
+
+/* =========================
+   Custom Post Type
+========================= */
+
+function register_works_post_type() {
+
+    register_post_type('works', array(
+
+        'labels' => array(
+            'name'          => 'Works',
+            'singular_name' => 'Work',
+        ),
+
+        'public' => true,
+
+        'has_archive' => true,
+
+        'rewrite' => array(
+            'slug' => 'works',
+        ),
+
+        'menu_position' => 5,
+
+        'menu_icon' => 'dashicons-portfolio',
+
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail',
+        ),
+
+        'show_in_rest' => true,
+
+    ));
+
+}
+
+add_action('init', 'register_works_post_type');
+
+
+/* =========================
+   Works Taxonomy
+========================= */
+
+function register_works_category_taxonomy() {
+
+    register_taxonomy(
+        'works_category',
+        array('works'),
+        array(
+            'labels' => array(
+                'name'          => 'Works Categories',
+                'singular_name' => 'Works Category',
+                'menu_name'     => 'Categories',
+                'all_items'     => 'All Categories',
+                'edit_item'     => 'Edit Category',
+                'add_new_item'  => 'Add New Category',
+            ),
+
+            'public' => true,
+
+            'hierarchical' => true,
+
+            'show_in_rest' => true,
+
+            'rewrite' => array(
+                'slug' => 'works-category',
+            ),
+        )
+    );
+}
+
+add_action('init', 'register_works_category_taxonomy');

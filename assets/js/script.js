@@ -17,3 +17,29 @@ navLinks.forEach((link) => {
         hamburger.setAttribute("aria-expanded", "false");
     });
 });
+
+
+/* =========================
+   Back to Top
+========================= */
+
+const backToTop = document.querySelector(".back-to-top");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 300) {
+        backToTop.classList.add("is-visible");
+    } else {
+        backToTop.classList.remove("is-visible");
+    }
+
+});
+
+backToTop.addEventListener("click", () => {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+
+});
