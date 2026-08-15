@@ -63,21 +63,45 @@
                                     class="works-item__thumbnail-link"
                                     aria-label="<?php echo esc_attr(get_the_title()); ?>の詳細を見る"
                                 >
-                                    <div class="works-item__thumbnail">
+                                    <?php
+                                        $thumbnail_position = get_field('thumbnail_position');
 
-                                        <?php if (has_post_thumbnail()) : ?>
+                                        if (!$thumbnail_position) {
+                                            $thumbnail_position = 'center';
+                                        }
 
-                                            <?php the_post_thumbnail('large'); ?>
+                                        $thumbnail_position_map = array(
+                                            'top'    => 'center top',
+                                            'center' => 'center center',
+                                            'bottom' => 'center bottom',
+                                        );
 
-                                        <?php else : ?>
+                                        $thumbnail_object_position =
+                                            $thumbnail_position_map[$thumbnail_position] ?? 'center center';
+                                        ?>
 
-                                            <div class="works-item__placeholder">
-                                                No Image
-                                            </div>
+                                        <div class="works-item__thumbnail">
 
-                                        <?php endif; ?>
+                                            <?php if (has_post_thumbnail()) : ?>
 
-                                    </div>
+                                                <?php
+                                                the_post_thumbnail(
+                                                    'large',
+                                                    array(
+                                                        'style' => 'object-position: ' . esc_attr($thumbnail_object_position) . ';'
+                                                    )
+                                                );
+                                                ?>
+
+                                            <?php else : ?>
+
+                                                <div class="works-item__placeholder">
+                                                    No Image
+                                                </div>
+
+                                            <?php endif; ?>
+
+                                        </div>
                                 </a>
 
                                 <div class="works-item__info">

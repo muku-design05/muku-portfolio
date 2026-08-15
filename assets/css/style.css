@@ -491,7 +491,7 @@ main {
 ========================= */
 
 .contact {
-    padding: 120px 0;
+    padding: 120px 0 0 0 ;
     text-align: center;
 }
 
@@ -535,6 +535,7 @@ main {
 .footer {
     padding: 40px 0;
     background: var(--color-surface-dark);
+    margin-top: 100px;
 }
 
 .footer__inner {
@@ -611,7 +612,7 @@ main {
 ========================= */
 
 .works-archive {
-    padding: 120px 0;
+    padding: 50px 0 0 0;
 }
 
 .works-archive__hero .container {
@@ -623,7 +624,7 @@ main {
     justify-content: center;
     flex-wrap: wrap;
     gap: 48px;
-    margin: 50px 0 80px;
+    margin: 0px 0 50px;
 }
 
 .works-archive__categories a {
@@ -716,6 +717,9 @@ main {
     color: var(--color-border);
     font-size: 18px;
     line-height: 1.5;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 
@@ -763,4 +767,330 @@ main {
     .works-item__thumbnail-link:hover .works-item__thumbnail img {
         transform: scale(1.03);
     }
+}
+
+/* Works detail */
+.work-detail__visual .container {
+    width: min(100% - 40px, 1200px);
+    margin-inline: auto;
+    margin-bottom:100px
+}
+
+.work-detail__gallery {
+    width: 100%;
+}
+
+.work-detail__main {
+    width: 100%;
+    position: relative;
+    height: 480px;
+}
+
+
+.work-detail__main-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.work-detail__main-image-file {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 680px;
+    object-fit: contain;
+}
+
+.work-detail__thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 1000px;
+    margin: 20px auto 0;
+}
+
+.work-detail__thumbnail {
+    width: 100px;
+    aspect-ratio: 4 / 3;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.work-detail__thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.work-detail__header {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.work-detail__header .section-title {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.work-detail__category {
+    margin: 0 0 16px;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.work-detail__title {
+    margin-bottom: 30px;
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.work-detail__breadcrumb {
+    padding-top: 24px;
+    font-size: 14px;
+    color: #888;
+}
+
+.work-detail__breadcrumb .container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.work-detail__breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity .3s;
+}
+
+.work-detail__breadcrumb a:hover {
+    opacity: .6;
+}
+
+.work-detail__breadcrumb span[aria-current="page"] {
+    color: #222;
+}
+
+.work-detail__info{
+    margin-bottom: 50px;
+}
+
+.work-detail__info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+
+    grid-auto-rows: 1fr;
+}
+
+.work-detail__info-card {
+    border: 1px solid #222;
+    padding: 20px 28px;
+    position: relative;
+    margin-top: 0;
+    
+}
+
+.work-detail__info-text {
+    overflow-wrap: anywhere;
+}
+
+.work-detail__info-title {
+    position: absolute;
+    top: -14px;
+    left: 0px;
+
+    margin: 0;
+    padding: 0 12px;
+
+    background: #fff;
+}
+
+.work-detail__text-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 24px;
+
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.work-detail__text-title::after {
+    content: "";
+    flex: 1;
+
+    height: 1px;
+    background: #222;
+}
+
+.work-detail__text-title span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+}
+
+.work-detail__text {
+    font-size: 18px;
+    line-height: 2;
+    color: #333;
+    letter-spacing: 0.05em;
+}
+
+.work-detail__text-block:not(:last-child) {
+    margin-bottom: 50px;
+}
+
+
+
+.work-detail__main-image {
+    width: 100%;
+    height: 100%;
+}
+
+.work-detail__main-image-file {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.work-detail__slider {
+    width: 100%;
+}
+
+
+
+.work-detail__main-image {
+    width: 100%;
+    height: 100%;
+}
+
+.work-detail__main-image-file {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* =========================
+   Work Detail Modal
+========================= */
+
+.work-detail__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+
+    overflow-y: auto;
+}
+
+.work-detail__modal.is-open {
+    display: flex;
+}
+
+.work-detail__modal-inner {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin: auto 0;
+
+    min-height: 100%;
+}
+
+.work-detail__modal-image {
+    display: block;
+
+    width: min(800px, 85vw);
+    height: auto;
+
+    max-width: none;
+    max-height: none;
+
+    margin: auto 0;
+
+    object-fit: contain;
+}
+
+.work-detail__modal-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    z-index: 2;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #fff;
+    font-size: 48px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.work-detail__expand-icon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+/* =========================
+   Work Detail YouTube
+========================= */
+
+.work-detail__youtube-frame {
+    width: min(800px, 85vw);
+    aspect-ratio: 16 / 9;
+
+    margin: auto;
+}
+
+.work-detail__youtube-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }

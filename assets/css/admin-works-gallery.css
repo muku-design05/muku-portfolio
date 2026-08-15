@@ -1,0 +1,67 @@
+.muku-works-gallery__description {
+    margin-bottom: 16px;
+}
+
+.muku-works-gallery__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    min-height: 20px;
+    margin: 0 0 20px;
+}
+
+.muku-works-gallery__item {
+    position: relative;
+    width: 140px;
+    margin: 0;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #dcdcde;
+    box-sizing: border-box;
+    cursor: move;
+}
+
+.muku-works-gallery__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f0f0f1;
+}
+
+.muku-works-gallery__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.muku-works-gallery__remove {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    display: grid;
+    place-items: center;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    background: #b32d2e;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.muku-works-gallery__remove:hover {
+    background: #8a2424;
+}
+
+.muku-works-gallery__placeholder {
+    width: 140px;
+    height: 156px;
+    margin: 0;
+    background: #f0f0f1;
+    border: 2px dashed #8c8f94;
+    box-sizing: border-box;
+}
