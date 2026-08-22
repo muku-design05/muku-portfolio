@@ -18,8 +18,8 @@
     <div class="container header__inner">
 
         <!-- ロゴ -->
-        <a href="#top" class="logo">
-            MUKU ANBO
+        <a href="<?php echo esc_url(home_url('/#top')); ?>" class="logo">
+        MUKU ANBO
         </a>
 
         <!-- ナビゲーション -->
@@ -27,14 +27,29 @@
            
             <ul>
 
-                <li><a href="#top">Top</a></li>
+                <li>
+                    <a href="<?php echo esc_url(home_url('/#top')); ?>">
+                        Top
+                    </a>
+                </li>
 
-                <li><a href="#works">Works</a></li>
+                <li>
+                    <a href="<?php echo esc_url(home_url('/#works')); ?>">
+                        Works
+                    </a>
+                </li>
 
-                <li><a href="#about">About</a></li>
+                <li>
+                    <a href="<?php echo esc_url(home_url('/#about')); ?>">
+                        About
+                    </a>
+                </li>
 
-                <li><a href="#contact">Contact</a></li>
-
+                <li>
+                    <a href="<?php echo esc_url(home_url('/#contact')); ?>">
+                        Contact
+                    </a>
+                </li>
             </ul>
 
         </nav>

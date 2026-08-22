@@ -34,51 +34,74 @@
     </section>
 
     <section id="works" class="works">
-        <div class="container">
+            <div class="container">
 
-            <h2 class="section-title">Works</h2>
+                <h2 class="section-title">Works</h2>
 
-            <nav class="works-category" aria-label="作品カテゴリー">
-                <ul>
-                    <li><a href="#works-web">WEB</a></li>
-                    <li><a href="#works-banner">BANNER</a></li>
-                    <li><a href="#works-graphic">GRAPHIC</a></li>
-                    <li><a href="#works-video">VIDEO</a></li>
-                </ul>
-            </nav>
+                <nav class="works-category" aria-label="作品カテゴリー">
+                    <ul>
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/works/#works-web')); ?>">
+                                WEB
+                            </a>
+                        </li>
 
-            <div class="works-pickup">
-                <a href="#" class="work-card">
-                    <div class="work-card__image">
-                        <span>WEB</span>
-                    </div>
-                </a>
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/works/#works-banner')); ?>">
+                                BANNER
+                            </a>
+                        </li>
 
-                <a href="#" class="work-card">
-                    <div class="work-card__image">
-                        <span>BANNER</span>
-                    </div>
-                </a>
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/works/#works-graphic')); ?>">
+                                GRAPHIC
+                            </a>
+                        </li>
 
-                <a href="#" class="work-card">
-                    <div class="work-card__image">
-                        <span>GRAPHIC</span>
-                    </div>
-                </a>
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/works/#works-video')); ?>">
+                                VIDEO
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
 
-                <a href="#" class="work-card">
-                    <div class="work-card__image">
-                        <span>VIDEO</span>
-                    </div>
-                </a>
+                <div class="works-pickup">
+
+                    <a href="<?php echo esc_url(home_url('/works/#web')); ?>" class="work-card">
+                        <div class="work-card__image">
+                            <span>WEB</span>
+                        </div>
+                    </a>
+
+                    <a href="<?php echo esc_url(home_url('/works/#banner')); ?>" class="work-card">
+                        <div class="work-card__image">
+                            <span>BANNER</span>
+                        </div>
+                    </a>
+
+                    <a href="<?php echo esc_url(home_url('/works/#graphic')); ?>" class="work-card">
+                        <div class="work-card__image">
+                            <span>GRAPHIC</span>
+                        </div>
+                    </a>
+
+                    <a href="<?php echo esc_url(home_url('/works/#video')); ?>" class="work-card">
+                        <div class="work-card__image">
+                            <span>VIDEO</span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="works-link">
+                    <a href="<?php echo esc_url(home_url('/works/')); ?>">
+                        View all works →
+                    </a>
+                </div>
+
             </div>
-
-            <div class="works-link">
-                <a href="#">View all works →</a>
-            </div>
-
-        </div>
-    </section>
+        </section>
 
    
     <section id="about" class="about">

@@ -263,53 +263,109 @@
 
                             <?php if ($role) : ?>
                                 <section class="work-detail__info-card">
-                                    <h3 class="work-detail__info-title">
-                                        ✦ Role <span>対応範囲</span>
-                                    </h3>
 
-                                    <p class="work-detail__info-text">
-                                        <?php echo nl2br(esc_html($role)); ?>
-                                    </p>
+                                    <button
+                                        type="button"
+                                        class="work-detail__accordion-trigger"
+                                        aria-expanded="false"
+                                    >
+                                        <span class="work-detail__info-title">
+                                            ✦ Role <span>対応範囲</span>
+                                        </span>
+
+                                        <span class="work-detail__accordion-icon">
+                                            ﹀
+                                        </span>
+                                    </button>
+
+                                    <div class="work-detail__accordion-content">
+                                        <p class="work-detail__info-text">
+                                            <?php echo nl2br(esc_html($role)); ?>
+                                        </p>
+                                    </div>
+
                                 </section>
                             <?php endif; ?>
 
                             <?php if ($tools) : ?>
                                 <section class="work-detail__info-card">
-                                    <h3 class="work-detail__info-title">
-                                        ✦ Tools <span>使用ツール</span>
-                                    </h3>
 
-                                    <p class="work-detail__info-text">
-                                        <?php echo nl2br(esc_html($tools)); ?>
-                                    </p>
+                                    <button
+                                        type="button"
+                                        class="work-detail__accordion-trigger"
+                                        aria-expanded="false"
+                                    >
+                                        <span class="work-detail__info-title">
+                                            ✦ Tools <span>使用ツール</span>
+                                        </span>
+
+                                        <span class="work-detail__accordion-icon">
+                                            ﹀
+                                        </span>
+                                    </button>
+
+                                    <div class="work-detail__accordion-content">
+                                        <p class="work-detail__info-text">
+                                            <?php echo nl2br(esc_html($tools)); ?>
+                                        </p>
+                                    </div>
+
                                 </section>
                             <?php endif; ?>
 
                             <?php if ($period || $year) : ?>
                                 <section class="work-detail__info-card">
-                                    <h3 class="work-detail__info-title">
-                                        ✦ Period <span>制作期間</span>
-                                    </h3>
 
-                                    <p class="work-detail__info-text">
-                                        <?php if ($period) : ?>
-                                            <?php echo nl2br(esc_html($period)); ?>
-                                        <?php elseif ($year) : ?>
-                                            <?php echo esc_html($year); ?>
-                                        <?php endif; ?>
-                                    </p>
+                                    <button
+                                        type="button"
+                                        class="work-detail__accordion-trigger"
+                                        aria-expanded="false"
+                                    >
+                                        <span class="work-detail__info-title">
+                                            ✦ Period <span>制作期間</span>
+                                        </span>
+
+                                        <span class="work-detail__accordion-icon">
+                                            ﹀
+                                        </span>
+                                    </button>
+
+                                    <div class="work-detail__accordion-content">
+                                        <p class="work-detail__info-text">
+                                            <?php if ($period) : ?>
+                                                <?php echo nl2br(esc_html($period)); ?>
+                                            <?php elseif ($year) : ?>
+                                                <?php echo esc_html($year); ?>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+
                                 </section>
                             <?php endif; ?>
 
                             <?php if ($project_type) : ?>
                                 <section class="work-detail__info-card">
-                                    <h3 class="work-detail__info-title">
-                                        ✦ Project Type <span>プロジェクト種別</span>
-                                    </h3>
 
-                                    <p class="work-detail__info-text">
-                                        <?php echo nl2br(esc_html($project_type)); ?>
-                                    </p>
+                                    <button
+                                        type="button"
+                                        class="work-detail__accordion-trigger"
+                                        aria-expanded="false"
+                                    >
+                                        <span class="work-detail__info-title">
+                                            ✦ Project Type <span>プロジェクト種別</span>
+                                        </span>
+
+                                        <span class="work-detail__accordion-icon">
+                                            ﹀
+                                        </span>
+                                    </button>
+
+                                    <div class="work-detail__accordion-content">
+                                        <p class="work-detail__info-text">
+                                            <?php echo nl2br(esc_html($project_type)); ?>
+                                        </p>
+                                    </div>
+
                                 </section>
                             <?php endif; ?>
 
@@ -325,37 +381,79 @@
 
                         <?php if ($overview) : ?>
                             <section class="work-detail__text-block">
-                                <h3 class="work-detail__text-title">
-                                    ✦ Overview <span>概要</span>
-                                </h3>
 
-                                <p class="work-detail__text">
-                                    <?php echo nl2br(esc_html($overview)); ?>
-                                </p>
+                                <button
+                                    type="button"
+                                    class="work-detail__accordion-trigger"
+                                    aria-expanded="false"
+                                >
+                                    <span class="work-detail__text-title">
+                                        ✦ Overview <span>概要</span>
+                                    </span>
+
+                                    <span class="work-detail__accordion-icon">
+                                        ﹀
+                                    </span>
+                                </button>
+
+                                <div class="work-detail__accordion-content">
+                                    <p class="work-detail__text">
+                                        <?php echo nl2br(esc_html($overview)); ?>
+                                    </p>
+                                </div>
+
                             </section>
                         <?php endif; ?>
 
-                        <?php if ($challenge) : ?>
+                       <?php if ($challenge) : ?>
                             <section class="work-detail__text-block">
-                                <h3 class="work-detail__text-title">
-                                    ✦ Challenge <span>課題</span>
-                                </h3>
 
-                                <p class="work-detail__text">
-                                    <?php echo nl2br(esc_html($challenge)); ?>
-                                </p>
+                                <button
+                                    type="button"
+                                    class="work-detail__accordion-trigger"
+                                    aria-expanded="false"
+                                >
+                                    <span class="work-detail__text-title">
+                                        ✦ Challenge <span>課題</span>
+                                    </span>
+
+                                    <span class="work-detail__accordion-icon">
+                                        ﹀
+                                    </span>
+                                </button>
+
+                                <div class="work-detail__accordion-content">
+                                    <p class="work-detail__text">
+                                        <?php echo nl2br(esc_html($challenge)); ?>
+                                    </p>
+                                </div>
+
                             </section>
                         <?php endif; ?>
 
                         <?php if ($design_point) : ?>
                             <section class="work-detail__text-block">
-                                <h3 class="work-detail__text-title">
-                                    ✦ Design Point <span>工夫点</span>
-                                </h3>
 
-                                <p class="work-detail__text">
-                                    <?php echo nl2br(esc_html($design_point)); ?>
-                                </p>
+                                <button
+                                    type="button"
+                                    class="work-detail__accordion-trigger"
+                                    aria-expanded="false"
+                                >
+                                    <span class="work-detail__text-title">
+                                        ✦ Design Point <span>工夫点</span>
+                                    </span>
+
+                                    <span class="work-detail__accordion-icon">
+                                        ﹀
+                                    </span>
+                                </button>
+
+                                <div class="work-detail__accordion-content">
+                                    <p class="work-detail__text">
+                                        <?php echo nl2br(esc_html($design_point)); ?>
+                                    </p>
+                                </div>
+
                             </section>
                         <?php endif; ?>
 

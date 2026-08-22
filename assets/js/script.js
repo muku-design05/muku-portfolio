@@ -197,3 +197,268 @@ if (
 
     });
 }
+
+
+
+/* =========================
+Work Detail Accordion
+========================= */
+
+const accordionTriggers = document.querySelectorAll(
+    ".work-detail__accordion-trigger"
+);
+
+accordionTriggers.forEach((trigger) => {
+
+    trigger.addEventListener("click", () => {
+
+        if (window.innerWidth > 767) {
+            return;
+        }
+
+        const content = trigger.nextElementSibling;
+
+        if (!content) {
+            return;
+        }
+
+        const isOpen = trigger.classList.toggle("is-open");
+
+        trigger.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+        content.classList.toggle("is-open", isOpen);
+
+    });
+
+});
+
+
+/* =========================
+Work Modal Pinch Zoom
+========================= */
+
+const modalImage = document.querySelector(
+    ".work-detail__modal-image"
+);
+
+if (modalImage && workModal) {
+
+    let scale = 1;
+
+    let startScale = 1;
+    let startDistance = 0;
+
+    let translateX = 0;
+    let translateY = 0;
+
+    let startTranslateX = 0;
+    let startTranslateY = 0;
+
+    let startCenterX = 0;
+    let startCenterY = 0;
+
+    let isDragging = false;
+
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    let dragStartTranslateX = 0;
+    let dragStartTranslateY = 0;
+
+
+    const getTouchDistance = (touches) => {
+
+        const x =
+            touches[0].clientX - touches[1].clientX;
+
+        const y =
+            touches[0].clientY - touches[1].clientY;
+
+        return Math.hypot(x, y);
+
+    };
+
+
+    const getTouchCenter = (touches) => {
+
+        return {
+            x:
+                (touches[0].clientX +
+                    touches[1].clientX) / 2,
+
+            y:
+                (touches[0].clientY +
+                    touches[1].clientY) / 2
+        };
+
+    };
+
+
+    const updateTransform = () => {
+
+        modalImage.style.transform =
+            `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+    };
+
+
+    /*
+     * タッチ開始
+     * 2本指はモーダル内のどこからでもOK
+     */
+    workModal.addEventListener(
+        "touchstart",
+        (e) => {
+
+            /*
+             * 拡大中の画像を1本指で移動
+             * 画像そのものに触れた場合だけ
+             */
+            if (
+                e.touches.length === 1 &&
+                scale > 1 &&
+                e.target === modalImage
+            ) {
+
+                isDragging = true;
+
+                dragStartX = e.touches[0].clientX;
+                dragStartY = e.touches[0].clientY;
+
+                dragStartTranslateX = translateX;
+                dragStartTranslateY = translateY;
+
+                return;
+            }
+
+
+            /*
+             * 2本指でなければ何もしない
+             */
+            if (e.touches.length !== 2) {
+                return;
+            }
+
+            isDragging = false;
+
+            startDistance =
+                getTouchDistance(e.touches);
+
+            startScale = scale;
+
+            startTranslateX = translateX;
+            startTranslateY = translateY;
+
+            const center =
+                getTouchCenter(e.touches);
+
+            startCenterX = center.x;
+            startCenterY = center.y;
+
+        },
+        { passive: true }
+    );
+
+
+    /*
+     * タッチ移動
+     */
+    workModal.addEventListener(
+        "touchmove",
+        (e) => {
+
+            /*
+             * 1本指ドラッグ
+             */
+            if (
+                e.touches.length === 1 &&
+                isDragging &&
+                scale > 1
+            ) {
+
+                e.preventDefault();
+
+                translateX =
+                    dragStartTranslateX +
+                    (e.touches[0].clientX - dragStartX);
+
+                translateY =
+                    dragStartTranslateY +
+                    (e.touches[0].clientY - dragStartY);
+
+                updateTransform();
+
+                return;
+            }
+
+
+            /*
+             * 2本指でなければ何もしない
+             */
+            if (e.touches.length !== 2) {
+                return;
+            }
+
+            e.preventDefault();
+
+
+            /* 拡大・縮小 */
+
+            const currentDistance =
+                getTouchDistance(e.touches);
+
+            scale =
+                startScale *
+                (currentDistance / startDistance);
+
+            scale = Math.min(
+                Math.max(scale, 1),
+                4
+            );
+
+
+            /* 2本指の移動 */
+
+            const center =
+                getTouchCenter(e.touches);
+
+            translateX =
+                startTranslateX +
+                (center.x - startCenterX);
+
+            translateY =
+                startTranslateY +
+                (center.y - startCenterY);
+
+
+            /* 最小サイズなら元の位置へ */
+
+            if (scale === 1) {
+                translateX = 0;
+                translateY = 0;
+            }
+
+
+            updateTransform();
+
+        },
+        { passive: false }
+    );
+
+
+    /*
+     * 指を離したら1本指ドラッグ終了
+     */
+    workModal.addEventListener(
+        "touchend",
+        () => {
+
+            isDragging = false;
+
+        }
+    );
+
+}
