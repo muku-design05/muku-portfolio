@@ -3,37 +3,44 @@
 <main id="top">
 
     <section class="hero">
-        <div class="hero__bg"></div>
+        <div class="hero__scale-wrap">
+            <div class="hero__bg"></div>
 
-        <div class="container hero__inner">
+            <div class="container hero__inner">
 
-            <div class="hero__content">
-                <p class="hero__label">PORTFOLIO</p>
+                <div class="hero__main">
 
-                <h1 class="hero__title">
-                    Digital<br>
-                    Designer
-                </h1>
+                    <div class="hero__content">
+                        <p class="hero__label">PORTFOLIO</p>
 
-                <p class="hero__text">
-                    Web design, visual communication,<br>
-                    and thoughtful creative production.
-                </p>
+                        <h1 class="hero__title">
+                            Digital<br>
+                            Designer
+                        </h1>
+
+                        <p class="hero__text">
+                            Web design, visual communication,<br>
+                            and thoughtful creative production.
+                        </p>
+                    </div>
+
+                    <div class="hero__visual">
+                        <div class="hero__metal"></div>
+                        <div class="hero__glass"></div>
+                    </div>
+
+                </div>
+
+                <a href="#works" class="hero__scroll" aria-label="Worksへ移動">
+                    <span></span>
+                </a>
             </div>
-
-            <div class="hero__visual">
-                <div class="hero__metal"></div>
-                <div class="hero__glass"></div>
-            </div>
-
-            <a href="#works" class="hero__scroll" aria-label="Worksへ移動">
-                <span></span>
-            </a>
-
         </div>
     </section>
 
     <section id="works" class="works">
+        <div class="section-3d section-3d--works-chrome" aria-hidden="true"></div>
+        
             <div class="container">
 
                 <h2 class="section-title">Works</h2>
@@ -103,28 +110,33 @@
             </div>
         </section>
 
-   
+    <div class="about-contact-wrap">
+
+    <div class="section-3d section-3d--explorations-chrome" aria-hidden="true"></div>
     <section id="about" class="about">
-    <div class="container">
+        
+        <div class="section-3d section-3d--about-glass" aria-hidden="true"></div>
+        
+        <div class="container">
 
-        <h2 class="section-title">About</h2>
+            <h2 class="section-title">About</h2>
 
-        <div class="about__body">
+            <div class="about__body">
 
-            <!-- About Me -->
-            <section class="about-block about-block--profile">
-                <h3 class="about-block__title">About me</h3>
+                <!-- About Me -->
+                <section class="about-block about-block--profile">
+                    <h3 class="about-block__title">About me</h3>
 
-                <div class="about-block__content about__profile-text">
-                    <p class="about__name">
-                        安保　椋 <span>Muku Anbo</span>
-                    </p>
+                    <div class="about-block__content about__profile-text">
+                        <p class="about__name">
+                            安保　椋 <span>Muku Anbo</span>
+                        </p>
 
-                    <p class="about__text">
-                        Webデザインを中心に、バナー、販促物、動画制作など幅広い制作を行っています。<br>
-                        限られたスペースの中でも情報が伝わることを意識し、見やすさと使いやすさを大切にしたデザインを心がけています。
-                    </p>
-                </div>
+                        <p class="about__text">
+                            Webデザインを中心に、バナー、販促物、動画制作など幅広い制作を行っています。<br>
+                            限られたスペースの中でも情報が伝わることを意識し、見やすさと使いやすさを大切にしたデザインを心がけています。
+                        </p>
+                    </div>
             </section>
 
 
@@ -133,6 +145,7 @@
 
                 <!-- Experience -->
                 <section class="about-block">
+                    
                     <h3 class="about-block__title">Experience</h3>
 
                     <div class="about-block__content">
@@ -232,7 +245,7 @@
     </div>
 </section>
 
-
+</div>
 
 
 </main>

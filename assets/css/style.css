@@ -31,10 +31,22 @@ body {
         linear-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(26, 26, 26, 0.08) 1px, transparent 1px);
     background-size: 32px 32px;
+    
 }
 
 main {
     width: 100%;
+    padding-bottom: 100px;
+}
+
+body.home main {
+    padding-bottom: 0;
+}
+
+.about-contact-wrap {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100px;
 }
 
 .container {
@@ -117,6 +129,12 @@ main {
     background: #fff;
 }
 
+.hero__scale-wrap {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 72px);
+}
+
 .hero__bg {
     position: absolute;
     inset: -32px;
@@ -127,16 +145,31 @@ main {
     animation: hero-bg-float 10s ease-in-out infinite alternate;
 }
 
+.hero__main {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 1200px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+
+
 .hero__inner {
     position: relative;
     z-index: 1;
     min-height: calc(100vh - 72px);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .hero__content {
-    position: absolute;
-    top: 120px;
-    left: 0;
+    position: relative;
     z-index: 2;
 }
 
@@ -147,7 +180,7 @@ main {
 }
 
 .hero__title {
-    font-size: clamp(72px, 8vw, 128px);
+    font-size: 128px;
     line-height: 0.9;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -161,55 +194,103 @@ main {
 }
 
 .hero__visual {
-    position: absolute;
-    top: 50%;
-    right: 6%;
+    position: relative;
     width: 360px;
     height: 320px;
-    transform: translateY(-50%);
+
+    align-self: start;
+    justify-self: end;
+
+    animation: hero-float 14s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    20% {
+        transform: translate(2px, -1px);
+    }
+
+    45% {
+        transform: translate(-1px, -3px);
+    }
+
+    70% {
+        transform: translate(2px, -1px);
+    }
+
+    85% {
+        transform: translate(-1px, 1px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .hero__metal {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -190px;
+    left: -250px;
     z-index: 2;
-    width: 220px;
-    height: 160px;
-    border-radius: 52% 48% 58% 42% / 45% 55% 42% 58%;
-    background: linear-gradient(135deg, #f4f4f4, #d6d6d6, #fafafa);
-    opacity: 0.7;
+
+    width: 700px;
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/hero-metal.png") center / contain no-repeat;
+
+    animation: hero-metal-float 7s ease-in-out infinite;
 }
 
 .hero__glass {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    left: -170px;
+    top: -130px;
     z-index: 1;
-    width: 220px;
-    height: 180px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.08),
-        inset 0 1px 1px rgba(255, 255, 255, 0.5);
-    border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+
+    width: 800px;
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/hero-glass.png") center / contain no-repeat;
+
+    animation: hero-glass-float 8.5s ease-in-out infinite;
 }
 
-.hero__glass::before {
-    content: "";
-    position: absolute;
-    top: 18px;
-    left: 22px;
-    width: 60px;
-    height: 10px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    filter: blur(4px);
-    transform: rotate(-18deg);
+@keyframes hero-metal-float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    35% {
+        transform: translate(2px, -2px) rotate(0.5deg);
+    }
+
+    70% {
+        transform: translate(-2px, 1px) rotate(-0.4deg);
+    }
 }
+
+@keyframes hero-glass-float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(3px, 2px) rotate(0.3deg);
+    }
+
+    55% {
+        transform: translate(-4px, -1px) rotate(-0.4deg);
+    }
+
+    80% {
+        transform: translate(2px, 3px) rotate(0.2deg);
+    }
+}
+
+
 
 .hero__scroll {
     position: absolute;
@@ -226,16 +307,28 @@ main {
     border-right: 14px solid transparent;
     border-top: 14px solid #565656;
 }
+@media screen and (min-width: 769px) and (max-width: 1367px) {
 
-@keyframes hero-bg-float {
-    from {
-        transform: translate(0, 0) scale(1.02);
+    .hero__scale-wrap {
+        width: 1920px;
+        height: calc(1080px - 72px);
+
+        position: absolute;
+        top: 0;
+        left: 50%;
+
+        transform: translateX(-50%) scale(var(--hero-scale));
+        transform-origin: top center;
     }
 
-    to {
-        transform: translate(12px, -8px) scale(1.06);
+    .hero__scale-wrap .hero__inner {
+    width: 1920px;
+    max-width: none;
+    margin: 0;
     }
 }
+
+
 
 
 /* =========================
@@ -244,10 +337,41 @@ main {
 
 .works {
     padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-3d--works-chrome {
+    position: absolute;
+    top: -10px;
+    right: -160px;
+    width: 500px;
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/works-chrome.png") center / contain no-repeat;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.section-3d--works-reuse {
+    position: absolute;
+    top: 140px;
+    left: -120px;
+
+    width: 300px;
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/hero-glass.png") center / contain no-repeat;
+
+    pointer-events: none;
+    z-index: 0;
 }
 
 .works .container {
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .section-title {
@@ -357,10 +481,28 @@ main {
 
 .about {
     padding: 120px 0;
+    position: relative;
+    
+}
+
+.section-3d--about-glass {
+    position: absolute;
+    top: 0px;
+    left: -160px;
+
+    width: 500px;
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/about-glass.png") center / contain no-repeat;
+
+    pointer-events: none;
+    z-index: 0;
 }
 
 .about .container {
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .about__body {
@@ -485,6 +627,24 @@ main {
     font-size: 20px;
 }
 
+.about-block--explorations {
+    position: relative;
+}
+
+.section-3d--explorations-chrome {
+    position: absolute;
+    top: 1050px;
+    right: -160px;
+
+    width: 500px;
+    
+    aspect-ratio: 1 / 1;
+
+    background: url("../images/explorations-chrome.png") center / contain no-repeat;
+
+    pointer-events: none;
+    z-index: 0;
+}
 
 /* =========================
    Contact
@@ -535,7 +695,16 @@ main {
 .footer {
     padding: 40px 0;
     background: var(--color-surface-dark);
-    margin-top: 100px;
+    margin-top: 0;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: 100px;
 }
 
 .footer__inner {
@@ -1102,6 +1271,7 @@ main {
 
 html {
     scrollbar-gutter: stable;
+    
 }
 
 /* =========================
@@ -1120,4 +1290,15 @@ html {
     width: 100%;
     height: 100%;
     border: 0;
+}
+
+
+.about-contact-wrap {
+    position: relative;
+    overflow: hidden;
+    
+}
+
+body.post-type-archive-works .footer {
+    margin-top: 100px;
 }

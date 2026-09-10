@@ -462,3 +462,137 @@ if (modalImage && workModal) {
     );
 
 }
+
+function updateHeroScale() {
+    const width = window.innerWidth;
+
+    if (width >= 769 && width <= 1367) {
+        const scale = width / 1920;
+        document.documentElement.style.setProperty('--hero-scale', scale);
+    } else {
+        document.documentElement.style.setProperty('--hero-scale', 1);
+    }
+}
+
+updateHeroScale();
+window.addEventListener('resize', updateHeroScale);
+
+/* =========================
+   Works 3D Scroll
+========================= */
+
+const worksChrome = document.querySelector(".section-3d--works-chrome");
+const worksSection = document.querySelector(".works");
+
+
+if (worksChrome && worksSection) {
+
+    function updateWorksChrome() {
+
+        const rect = worksSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        const startPoint = windowHeight * 0.5;
+
+        const progress =
+        (startPoint - rect.top) /
+        rect.height;
+
+        const clampedProgress = Math.min(Math.max(progress, 0), 1);
+
+        const rotate = clampedProgress * -180;
+        const moveY =
+        clampedProgress *
+        (worksSection.offsetHeight - worksChrome.offsetHeight);
+        
+
+       worksChrome.style.transform =
+            `translateY(${moveY}px) rotate(${rotate}deg)`;
+        
+        
+       
+    }
+
+    updateWorksChrome();
+    window.addEventListener("scroll", updateWorksChrome);
+}
+
+/* =========================
+   About 3D Scroll
+========================= */
+
+const aboutGlass = document.querySelector(".section-3d--about-glass");
+const aboutSection = document.querySelector(".about");
+
+if (aboutGlass && aboutSection) {
+
+    function updateAboutGlass() {
+
+        const rect = aboutSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        const startPoint = windowHeight * 0.4;
+
+        const progress =
+            (startPoint - rect.top) /
+            rect.height;
+
+        const clampedProgress = Math.min(Math.max(progress, 0), 1);
+
+        const rotate = clampedProgress * 180;
+
+        const moveY =
+            clampedProgress *
+            (aboutSection.offsetHeight - aboutGlass.offsetHeight) * 1.1;
+
+        const stopY = 760;
+
+        const limitedMoveY = Math.min(moveY, stopY);
+
+        aboutGlass.style.transform =
+        `translateY(${limitedMoveY}px) rotate(${rotate}deg)`;
+    }
+
+    updateAboutGlass();
+    window.addEventListener("scroll", updateAboutGlass);
+}
+
+/* =========================
+   Explorations 3D Scroll
+========================= */
+
+const explorationsChrome = document.querySelector(".section-3d--explorations-chrome");
+const explorationsSection = document.querySelector(".about-block--explorations");
+
+if (explorationsChrome && explorationsSection) {
+
+    function updateExplorationsChrome() {
+
+        const rect = explorationsSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        const isSP = window.innerWidth <= 768;
+
+        const startPoint = windowHeight * (isSP ? 0.7 : 0.5);
+
+        const progress =
+            (startPoint - rect.top) /
+            rect.height;
+
+        const clampedProgress = Math.min(Math.max(progress, 0), 1);
+
+       
+
+        const rotate = Math.max(progress, 0) * (isSP ? -40 : -85);
+        const moveY = Math.max(progress, 0) * (isSP ? 300 : 500);
+        const stopY = 820;
+
+        const limitedMoveY = Math.min(moveY, stopY);
+
+        explorationsChrome.style.transform =
+            `translateY(${limitedMoveY}px) rotate(${rotate}deg)`;
+    }
+
+    updateExplorationsChrome();
+    window.addEventListener("scroll", updateExplorationsChrome);
+}
