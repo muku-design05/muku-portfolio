@@ -18,7 +18,7 @@
     <div class="container header__inner">
 
         <!-- ロゴ -->
-        <a href="<?php echo esc_url(home_url('/#top')); ?>" class="logo">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
         MUKU ANBO
         </a>
 

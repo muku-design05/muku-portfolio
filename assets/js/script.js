@@ -596,3 +596,60 @@ if (explorationsChrome && explorationsSection) {
     updateExplorationsChrome();
     window.addEventListener("scroll", updateExplorationsChrome);
 }
+
+
+const archive3dObjects = document.querySelectorAll(".works-group__3d");
+
+archive3dObjects.forEach((object) => {
+    const section = object.closest(".works-group");
+
+    if (!section) return;
+
+    const objectStartTop = object.offsetTop;
+    const sectionStartTop = section.getBoundingClientRect().top;
+    
+
+    function updateArchive3d() {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        const isFirstGroup = section.id === "web";
+
+        const isSP = window.innerWidth <= 768;
+        const startPoint =
+            isFirstGroup && !isSP
+                ? sectionStartTop
+                : windowHeight * 0.5;
+
+        const progress =
+            (startPoint - rect.top) /
+            (isSP ? rect.height : rect.height - windowHeight * 0.5);
+
+        const clampedProgress = Math.min(Math.max(progress, 0), 1);
+        const lastInfo = section.querySelector(
+            ".works-item:last-child .works-item__info"
+        );
+
+        const sectionRect = section.getBoundingClientRect();
+        const lastInfoRect = lastInfo?.getBoundingClientRect();
+
+        const endPoint = lastInfoRect
+            ? lastInfoRect.bottom - sectionRect.top
+            : 0;
+        const moveDistance =
+            Math.max(
+                endPoint - objectStartTop - object.offsetHeight,
+                0
+            );
+
+        const moveY = clampedProgress * moveDistance;
+        const rotate = moveY * -0.35;
+
+        object.style.transform =
+            `translateY(${moveY}px) rotate(${rotate}deg)`;
+    }
+
+    updateArchive3d();
+    window.addEventListener("scroll", updateArchive3d);
+
+});

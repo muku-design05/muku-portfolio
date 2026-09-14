@@ -811,6 +811,58 @@ body.home main {
     color: var(--color-white);
 }
 
+.works-group {
+    position: relative;
+}
+
+.works-group__3d {
+    position: absolute;
+    top: 0;
+    width: 280px;
+    aspect-ratio: 1 / 1;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+
+    
+    
+}
+
+.works-group__title,
+.works-archive__grid,
+.works-group__empty {
+    position: relative;
+    z-index: 1;
+}
+
+.works-group__3d--web {
+    background-image: url("../images/archive-web-chrome.png");
+}
+
+.works-group__3d--banner {
+    background-image: url("../images/archive-banner-glass.png");
+}
+
+.works-group__3d--graphic {
+    background-image: url("../images/archive-graphic-chrome.png");
+}
+
+.works-group__3d--video {
+    background-image: url("../images/archive-video-glass.png");
+}
+
+.works-group__3d--web,
+.works-group__3d--graphic {
+    right: calc((100vw - 100%) / -2 - 160px);
+}
+
+.works-group__3d--banner,
+.works-group__3d--video {
+    left: calc((100vw - 100%) / -2 - 160px);
+}
+
 
 /* ===== Works Grid ===== */
 

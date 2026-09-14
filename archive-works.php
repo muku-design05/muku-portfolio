@@ -46,6 +46,8 @@
 
                 <section id="<?php echo esc_attr($slug); ?>" class="works-group">
 
+                    <div class="works-group__3d works-group__3d--<?php echo esc_attr($slug); ?>" aria-hidden="true"></div>
+
                     <h2 class="works-group__title">
                         <?php echo esc_html($label); ?>
                     </h2>

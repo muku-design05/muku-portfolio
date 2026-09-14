@@ -698,7 +698,7 @@
 
 
 /* =========================
-   chrome,glass
+   top_chrome,glass
 ========================= */
 .section-3d--works-chrome,
 .section-3d--about-glass,
@@ -717,7 +717,23 @@
 .section-3d--explorations-chrome {
     right: -100px;
 }
+/* =========================
+   work_chrome,glass
+========================= */
 
+.works-group__3d {
+    width: 130px;
+}
+
+.works-group__3d--web,
+.works-group__3d--graphic {
+    right: -80px;
+}
+
+.works-group__3d--banner,
+.works-group__3d--video {
+    left: -80px;
+}
 }
 
 
