@@ -477,13 +477,43 @@ function updateHeroScale() {
 updateHeroScale();
 window.addEventListener('resize', updateHeroScale);
 
+
+/* =========================
+   SP Top 3D Auto Layout
+========================= */
+
+let spTop3dSegmentHeight = 0;
+let spTop3dStartTop = 0;
+
+function updateSPTop3dLayout() {
+
+    if (window.innerWidth > 768) return;
+
+    const startSection = document.querySelector(".works");
+    const endSection = document.querySelector(".about-contact-wrap");
+
+    if (!startSection || !endSection) return;
+
+    spTop3dStartTop =
+    startSection.getBoundingClientRect().top + window.scrollY;
+
+    const endBottom =
+        endSection.getBoundingClientRect().bottom + window.scrollY;
+
+    const totalHeight = endBottom - spTop3dStartTop;
+
+    spTop3dSegmentHeight = totalHeight / 3;
+}
+
+updateSPTop3dLayout();
+window.addEventListener("resize", updateSPTop3dLayout);
+
 /* =========================
    Works 3D Scroll
 ========================= */
 
 const worksChrome = document.querySelector(".section-3d--works-chrome");
 const worksSection = document.querySelector(".works");
-
 
 if (worksChrome && worksSection) {
 
@@ -495,27 +525,38 @@ if (worksChrome && worksSection) {
         const startPoint = windowHeight * 0.5;
 
         const progress =
-        (startPoint - rect.top) /
-        rect.height;
+            window.innerWidth <= 768
+                ? (window.scrollY + startPoint - spTop3dStartTop) /
+                spTop3dSegmentHeight
+                : (startPoint - rect.top) / rect.height;
 
         const clampedProgress = Math.min(Math.max(progress, 0), 1);
 
         const rotate = clampedProgress * -180;
-        const moveY =
-        clampedProgress *
-        (worksSection.offsetHeight - worksChrome.offsetHeight);
-        
 
-       worksChrome.style.transform =
+        const worksStartY =
+            worksChrome.offsetTop +
+            worksChrome.offsetHeight;
+
+        const moveDistance =
+            window.innerWidth <= 768
+                ? Math.max(
+                    spTop3dSegmentHeight - worksStartY - 100,
+                    0
+                )
+                : worksSection.offsetHeight - worksChrome.offsetHeight;
+
+        const moveY =
+            clampedProgress * moveDistance;
+
+        worksChrome.style.transform =
             `translateY(${moveY}px) rotate(${rotate}deg)`;
-        
-        
-       
     }
 
     updateWorksChrome();
     window.addEventListener("scroll", updateWorksChrome);
 }
+
 
 /* =========================
    About 3D Scroll
@@ -531,31 +572,56 @@ if (aboutGlass && aboutSection) {
         const rect = aboutSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        const startPoint = windowHeight * 0.4;
+        const startPoint =
+            window.innerWidth <= 768
+                ? windowHeight * 0.5
+                : windowHeight * 0.4;
 
         const progress =
-            (startPoint - rect.top) /
-            rect.height;
+            window.innerWidth <= 768
+                ? (
+                    window.scrollY +
+                    startPoint -
+                    spTop3dStartTop -
+                    spTop3dSegmentHeight
+                ) / spTop3dSegmentHeight
+                : (startPoint - rect.top) / rect.height;
 
         const clampedProgress = Math.min(Math.max(progress, 0), 1);
 
         const rotate = clampedProgress * 180;
 
+        const aboutStartY =
+            aboutSection.getBoundingClientRect().top +
+            window.scrollY -
+            spTop3dStartTop +
+            aboutGlass.offsetTop +
+            aboutGlass.offsetHeight
+
+        const moveDistance =
+            window.innerWidth <= 768
+                ? Math.max(
+                    spTop3dSegmentHeight * 2 - aboutStartY,
+                    0
+                )
+                : (aboutSection.offsetHeight - aboutGlass.offsetHeight) * 1.1;
+
         const moveY =
-            clampedProgress *
-            (aboutSection.offsetHeight - aboutGlass.offsetHeight) * 1.1;
+            clampedProgress * moveDistance;
 
-        const stopY = 760;
-
-        const limitedMoveY = Math.min(moveY, stopY);
+        const limitedMoveY =
+            window.innerWidth <= 768
+                ? moveY
+                : Math.min(moveY, 760);
 
         aboutGlass.style.transform =
-        `translateY(${limitedMoveY}px) rotate(${rotate}deg)`;
+            `translateY(${limitedMoveY}px) rotate(${rotate}deg)`;
     }
 
     updateAboutGlass();
     window.addEventListener("scroll", updateAboutGlass);
 }
+
 
 /* =========================
    Explorations 3D Scroll
@@ -573,21 +639,53 @@ if (explorationsChrome && explorationsSection) {
 
         const isSP = window.innerWidth <= 768;
 
-        const startPoint = windowHeight * (isSP ? 0.7 : 0.5);
+        const startPoint =
+            windowHeight * 0.5;
 
         const progress =
-            (startPoint - rect.top) /
-            rect.height;
+            isSP
+                ? (
+                    window.scrollY +
+                    startPoint -
+                    spTop3dStartTop -
+                    spTop3dSegmentHeight * 2
+                ) / spTop3dSegmentHeight
+                : (startPoint - rect.top) / rect.height;
 
-        const clampedProgress = Math.min(Math.max(progress, 0), 1);
+        const clampedProgress =
+            Math.min(Math.max(progress, 0), 1);
 
-       
+        const rotate =
+            isSP
+                ? clampedProgress * -180
+                : Math.max(progress, 0) * -85;
 
-        const rotate = Math.max(progress, 0) * (isSP ? -40 : -85);
-        const moveY = Math.max(progress, 0) * (isSP ? 300 : 500);
-        const stopY = 820;
+       const explorationsParent = explorationsChrome.offsetParent;
 
-        const limitedMoveY = Math.min(moveY, stopY);
+        const explorationsStartY =
+            explorationsParent.getBoundingClientRect().top +
+            window.scrollY -
+            spTop3dStartTop +
+            explorationsChrome.offsetTop +
+            explorationsChrome.offsetHeight / 2
+
+        const moveDistance =
+            isSP
+                ? Math.max(
+                    spTop3dSegmentHeight * 3 - explorationsStartY + 100,
+                    0
+                )
+                : 500;
+
+        const moveY =
+            isSP
+                ? clampedProgress * moveDistance
+                : Math.max(progress, 0) * moveDistance;
+
+        const limitedMoveY =
+            isSP
+                ? moveY
+                : Math.min(moveY, 820);
 
         explorationsChrome.style.transform =
             `translateY(${limitedMoveY}px) rotate(${rotate}deg)`;
@@ -597,6 +695,10 @@ if (explorationsChrome && explorationsSection) {
     window.addEventListener("scroll", updateExplorationsChrome);
 }
 
+
+/* =========================
+   Works_group 3D Scroll
+========================= */
 
 const archive3dObjects = document.querySelectorAll(".works-group__3d");
 

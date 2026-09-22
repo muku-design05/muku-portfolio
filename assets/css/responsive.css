@@ -209,7 +209,8 @@
     }
 
     .works {
-    padding: 50px 0;
+        padding: 50px 0;
+        overflow: visible;
     }
 
     .section-title {
@@ -717,6 +718,18 @@
 .section-3d--explorations-chrome {
     right: -100px;
 }
+
+.about-contact-wrap {
+    overflow: visible;
+}
+
+.contact {
+    position: relative;
+    z-index: 1;
+}
+
+
+
 /* =========================
    work_chrome,glass
 ========================= */
