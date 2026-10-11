@@ -77,24 +77,40 @@
 
                     <a href="<?php echo esc_url(home_url('/works/#web')); ?>" class="work-card">
                         <div class="work-card__image">
+                            <img
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-web.jpg'); ?>"
+                                alt="Web制作実績"
+                            >
                             <span>WEB</span>
                         </div>
                     </a>
 
                     <a href="<?php echo esc_url(home_url('/works/#banner')); ?>" class="work-card">
                         <div class="work-card__image">
+                            <img
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-banner.jpg'); ?>"
+                                alt="バナー制作実績"
+                            >
                             <span>BANNER</span>
                         </div>
                     </a>
 
                     <a href="<?php echo esc_url(home_url('/works/#graphic')); ?>" class="work-card">
                         <div class="work-card__image">
+                            <img
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-graphic.jpg'); ?>"
+                                alt="グラフィック制作実績"
+                            >
                             <span>GRAPHIC</span>
                         </div>
                     </a>
 
                     <a href="<?php echo esc_url(home_url('/works/#video')); ?>" class="work-card">
                         <div class="work-card__image">
+                            <img
+                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-video.jpg'); ?>"
+                                alt="動画制作実績"
+                            >
                             <span>VIDEO</span>
                         </div>
                     </a>
@@ -211,15 +227,19 @@
                 <div class="about-block__content">
                     <div class="explorations">
 
-                        <a href="#" class="exploration-card">
-                            <div class="exploration-card__image"></div>
-                            <p>illust</p>
-                        </a>
+                        <div class="exploration-card">
+                            <div class="exploration-card__image">
+                                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/exploration-sculpture.jpg'); ?>" alt="彫刻作品">
+                            </div>
+                            <p>Sculpture</p>
+                        </div>
 
-                        <a href="#" class="exploration-card">
-                            <div class="exploration-card__image"></div>
-                            <p>logo</p>
-                        </a>
+                        <div class="exploration-card">
+                            <div class="exploration-card__image">
+                                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/exploration-3dcg.jpg'); ?>" alt="Mayaで制作した3DCG作品">
+                            </div>
+                            <p>3DCG</p>
+                        </div>
 
                     </div>
                 </div>

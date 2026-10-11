@@ -493,3 +493,12 @@ add_action(
     'admin_enqueue_scripts',
     'muku_enqueue_works_gallery_admin_assets'
 );
+
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'kosugi-font',
+        'https://fonts.googleapis.com/css2?family=Kosugi&display=swap',
+        array(),
+        null
+    );
+});

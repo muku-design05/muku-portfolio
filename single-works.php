@@ -108,7 +108,15 @@
                         <?php endif; ?>
 
                         <h2 class="work-detail__title">
-                            <?php the_title(); ?>
+                            <span class="works-item__title-pc">
+                                <?php the_title(); ?>
+                            </span>
+                            <span class="works-item__title-sp">
+                                <?php
+                                $sp_title = get_field('sp_title');
+                                echo $sp_title ? nl2br(esc_html($sp_title)) : esc_html(get_the_title());
+                                ?>
+                            </span>
                         </h2>
 
                     </div>
@@ -137,15 +145,12 @@
                                     >
 
                                         <?php
-                                        echo wp_get_attachment_image(
-                                            $gallery_ids[0],
-                                            'full',
-                                            false,
-                                            array(
-                                                'class' => 'work-detail__main-image-file',
-                                                'data-current-index' => '0'
-                                            )
-                                        );
+                                        echo '<img
+                                            class="work-detail__main-image-file"
+                                            src="' . esc_url(wp_get_attachment_image_url($gallery_ids[0], 'full')) . '"
+                                            data-current-index="0"
+                                            alt=""
+                                        >';
                                         ?>
 
                                         <span class="work-detail__expand-icon">
@@ -189,7 +194,7 @@
 
                                                 echo wp_get_attachment_image(
                                                     $image_id,
-                                                    'medium',
+                                                    'large',
                                                     false,
                                                     array(
                                                         'style' => 'object-position: ' . esc_attr($object_position) . ';'

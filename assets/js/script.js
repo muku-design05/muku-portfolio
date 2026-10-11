@@ -141,7 +141,13 @@ if (
         return;
     }
 
-    workModalImage.src = currentMainImageFile.src;
+    const currentIndex = currentMainImageFile.dataset.currentIndex;
+
+    const currentThumbnail = document.querySelector(
+        `.work-detail__thumbnail[data-index="${currentIndex}"]`
+    );
+
+    workModalImage.src = currentThumbnail.dataset.full;
 
     workModal.classList.add("is-open");
     workModal.setAttribute("aria-hidden", "false");

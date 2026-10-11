@@ -120,7 +120,15 @@
                                     <?php endif; ?>
 
                                     <h3 class="works-item__title">
-                                        <?php the_title(); ?>
+                                        <span class="works-item__title-pc">
+                                            <?php the_title(); ?>
+                                        </span>
+                                        <span class="works-item__title-sp">
+                                            <?php
+                                            $sp_title = get_field('sp_title');
+                                            echo $sp_title ? nl2br(esc_html($sp_title)) : esc_html(get_the_title());
+                                            ?>
+                                        </span>
                                     </h3>
 
                                     <?php if ($role) : ?>
