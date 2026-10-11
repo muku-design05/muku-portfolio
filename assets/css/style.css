@@ -1160,11 +1160,10 @@ body.home main {
 }
 
 .work-detail__info-card {
-    border: 1px solid #222;
-    padding: 20px 28px;
+    border: none;
+    padding: 16px 0;
     position: relative;
     margin-top: 0;
-    
 }
 
 .work-detail__info-text {
@@ -1172,16 +1171,12 @@ body.home main {
 }
 
 .work-detail__info-title {
-    position: absolute;
-    top: -14px;
-    left: 0px;
-
-    margin: 0;
-    padding: 0 12px;
-
-    background: #fff;
-
-    font-weight: 600;
+    position: static;
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 0;
+    background: transparent;
+    font-weight: 500;
     font-size: 20px;
 }
 
@@ -1397,4 +1392,25 @@ html {
 
 body.post-type-archive-works .footer {
     margin-top: 100px;
+}
+
+
+/* Work Detail：テキストの視認性改善 */
+.work-detail__info .container,
+.work-detail__description .container {
+    background: rgba(255, 255, 255, 0.86);
+}
+
+
+/* Work Detail：見出しの太さ・日本語ラベルを統一 */
+.work-detail__info-title,
+.work-detail__text-title {
+    font-weight: 400;
+}
+
+/* 日本語ラベルを控えめなグレーに */
+.work-detail__info-title span,
+.work-detail__text-title span {
+    color: #777;
+    font-weight: 400;
 }
