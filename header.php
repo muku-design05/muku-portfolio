@@ -19,7 +19,7 @@
 
         <!-- ロゴ -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-        MUKU ANBO
+        MUKU PORTFOLIO
         </a>
 
         <!-- ナビゲーション -->

@@ -257,9 +257,9 @@
 
         <p class="contact__text">Let's work together.</p>
 
-        <a href="mailto:anbo.muku@gmail.com" class="contact__mail">
+        <a href="mailto:anbmk0525@gmail.com" class="contact__mail">
             <span class="contact__icon">✉</span>
-            <span>anbo.muku@gmail.com</span>
+            <span>anbmk0525@gmail.com</span>
         </a>
 
     </div>
