@@ -502,3 +502,6 @@ add_action('wp_enqueue_scripts', function () {
         null
     );
 });
+
+// 大きな画像の自動縮小を無効化
+add_filter('big_image_size_threshold', '__return_false');
