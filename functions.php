@@ -142,6 +142,175 @@ add_action('add_meta_boxes', 'muku_add_works_gallery_meta_box');
 
 
 /**
+ * OTHER WORKS専用ギャラリー
+ */
+function muku_add_other_works_meta_box() {
+
+    // 現職のWeb作品だけに表示
+    $post = get_post();
+
+    if (!$post || $post->post_name !== 'web2026_01') {
+        return;
+    }
+
+    add_meta_box(
+        'muku-other-works-gallery',
+        'Other Works Gallery',
+        'muku_render_other_works_meta_box',
+        'works',
+        'normal',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'muku_add_other_works_meta_box');
+
+
+/**
+ * OTHER WORKSの入力欄
+ */
+function muku_render_other_works_meta_box($post) {
+
+    wp_nonce_field(
+        'muku_save_other_works',
+        'muku_other_works_nonce'
+    );
+
+        $other_gallery_ids = get_post_meta(
+        $post->ID,
+        '_muku_other_works_gallery_ids',
+        true
+    );
+
+    if (!is_array($other_gallery_ids)) {
+        $other_gallery_ids = array();
+    }
+
+    ?>
+
+    <div class="muku-other-works-gallery">
+
+        <p>
+            その他の制作実績として掲載する画像を登録します。
+        </p>
+
+        <input
+            type="hidden"
+            id="muku-other-works-gallery-ids"
+            name="muku_other_works_gallery_ids"
+            value="<?php echo esc_attr(implode(',', $other_gallery_ids)); ?>"
+        >
+
+        <ul id="muku-other-works-gallery-list">
+            <?php foreach ($other_gallery_ids as $attachment_id) : ?>
+                <?php
+                $attachment_id = absint($attachment_id);
+
+                $thumbnail_url = wp_get_attachment_image_url(
+                    $attachment_id,
+                    'thumbnail'
+                );
+
+                if (!$thumbnail_url) {
+                    continue;
+                }
+                ?>
+
+                <li
+                    data-attachment-id="<?php echo esc_attr($attachment_id); ?>"
+                    style="display: inline-block; margin: 8px; cursor: move;"
+                >
+                    <img
+                        src="<?php echo esc_url($thumbnail_url); ?>"
+                        alt=""
+                        style="width: 100px; height: 100px; object-fit: cover; display: block;"
+                    >
+
+                    <button
+                        type="button"
+                        class="button"
+                    >
+                        × 削除
+                    </button>
+                </li>
+
+            <?php endforeach; ?>
+        </ul>
+
+        <button
+            type="button"
+            id="muku-other-works-gallery-add"
+            class="button button-primary"
+        >
+            ＋ 画像を追加
+        </button>
+
+    </div>
+
+    <?php
+}
+
+
+/**
+ * OTHER WORKSの画像を保存
+ */
+function muku_save_other_works_gallery($post_id) {
+
+    // nonceの確認
+    if (
+        !isset($_POST['muku_other_works_nonce']) ||
+        !wp_verify_nonce(
+            sanitize_text_field(wp_unslash($_POST['muku_other_works_nonce'])),
+            'muku_save_other_works'
+        )
+    ) {
+        return;
+    }
+
+    // 自動保存・リビジョンを除外
+    if (
+        (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) ||
+        wp_is_post_revision($post_id)
+    ) {
+        return;
+    }
+
+    // 編集権限の確認
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // 対象の作品だけ保存
+    if (get_post_field('post_name', $post_id) !== 'web2026_01') {
+        return;
+    }
+
+    // 画像IDを取得して保存
+    if (isset($_POST['muku_other_works_gallery_ids'])) {
+
+        $gallery_ids = array_filter(
+            array_map(
+                'absint',
+                explode(
+                    ',',
+                    sanitize_text_field(
+                        wp_unslash($_POST['muku_other_works_gallery_ids'])
+                    )
+                )
+            )
+        );
+
+        update_post_meta(
+            $post_id,
+            '_muku_other_works_gallery_ids',
+            array_values($gallery_ids)
+        );
+
+    }
+}
+add_action('save_post_works', 'muku_save_other_works_gallery');
+
+
+/**
  * ギャラリー入力欄を表示
  */
 function muku_render_works_gallery_meta_box($post) {

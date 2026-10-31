@@ -127,6 +127,23 @@ if (
 
     document.addEventListener("click", (e) => {
 
+    // ① Related Worksの画像をクリックした場合
+    const otherButton = e.target.closest(".work-detail__other-button");
+
+    if (otherButton) {
+
+        workModalImage.src = otherButton.dataset.full;
+
+        workModal.classList.add("is-open");
+        workModal.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+
+        return;
+    }
+
+    // ② メインギャラリーの画像をクリックした場合
     const imageButton = e.target.closest(".work-detail__main-image");
 
     if (!imageButton) {
@@ -155,7 +172,9 @@ if (
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
 
-    });
+});
+
+    
 
     workModalClose.addEventListener("click", () => {
 

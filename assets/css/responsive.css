@@ -677,7 +677,7 @@
 
 .work-detail__modal {
     overflow: auto;
-    touch-action: none;
+    touch-action: pan-y;
 }
 
 .work-detail__modal-inner {
@@ -694,7 +694,7 @@
     height: auto;
     margin: 0 auto;
 
-    touch-action: none;
+    touch-action: pan-y;
 }
 
 .work-detail__accordion-trigger,
@@ -714,6 +714,28 @@
 .work-detail__accordion-trigger * {
     color: inherit;
     -webkit-text-fill-color: inherit;
+}
+
+
+/* =========================
+   Work Detail - Other Works
+========================= */
+
+.work-detail__other-works {
+    padding: 40px 0 70px;
+}
+
+.work-detail__other-works .container {
+    padding: 24px 0;
+}
+
+.work-detail__other-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.work-detail__other-image {
+    height: 180px;
 }
 
 
@@ -772,6 +794,15 @@
 @media (max-width: 374px) {
     .hero__visual {
         right: -110px;
+    }
+
+    /* Other Works */
+    .work-detail__other-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .work-detail__other-image {
+        height: 240px;
     }
 }
 

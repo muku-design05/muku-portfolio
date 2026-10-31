@@ -178,3 +178,109 @@ jQuery(function ($) {
         }
     );
 });
+
+/**
+ * OTHER WORKS専用ギャラリー
+ */
+jQuery(function ($) {
+    const $list = $('#muku-other-works-gallery-list');
+    const $input = $('#muku-other-works-gallery-ids');
+    const $addButton = $('#muku-other-works-gallery-add');
+
+    if (!$list.length || !$input.length || !$addButton.length) {
+        return;
+    }
+
+    // 画像IDをhiddenに反映
+    const updateIds = () => {
+        const ids = $list.find('li[data-attachment-id]').map(function () {
+            return $(this).data('attachment-id');
+        }).get();
+
+        $input.val(ids.join(','));
+    };
+
+    // 画像を並び替え
+    $list.sortable({
+        items: 'li[data-attachment-id]',
+        cursor: 'move',
+        update: updateIds,
+    });
+
+    // 画像を追加
+    $addButton.on('click', function (event) {
+        event.preventDefault();
+
+        const mediaFrame = wp.media({
+            title: 'OTHER WORKSに画像を追加',
+            button: {
+                text: '画像を追加',
+            },
+            library: {
+                type: 'image',
+            },
+            multiple: true,
+        });
+
+        mediaFrame.on('select', function () {
+            const images = mediaFrame.state().get('selection').toJSON();
+
+            const currentIds = $list.find('li[data-attachment-id]')
+                .map(function () {
+                    return Number($(this).data('attachment-id'));
+                }).get();
+
+            images.forEach(function (image) {
+                if (currentIds.includes(image.id)) {
+                    return;
+                }
+
+                const thumbnailUrl =
+                    image.sizes?.thumbnail?.url ||
+                    image.sizes?.medium?.url ||
+                    image.url;
+
+                const $item = $('<li>', {
+                    'data-attachment-id': image.id,
+                    css: {
+                        display: 'inline-block',
+                        margin: '8px',
+                        cursor: 'move',
+                    },
+                });
+
+                $('<img>', {
+                    src: thumbnailUrl,
+                    alt: '',
+                    css: {
+                        width: '100px',
+                        height: '100px',
+                        objectFit: 'cover',
+                        display: 'block',
+                    },
+                }).appendTo($item);
+
+                $('<button>', {
+                    type: 'button',
+                    text: '× 削除',
+                    class: 'button',
+                }).appendTo($item);
+
+                $list.append($item);
+                currentIds.push(image.id);
+            });
+
+            updateIds();
+        });
+
+        mediaFrame.open();
+    });
+
+    // 画像を削除
+    $list.on('click', 'button', function (event) {
+        event.preventDefault();
+
+        $(this).closest('li[data-attachment-id]').remove();
+        updateIds();
+    });
+});

@@ -1414,3 +1414,71 @@ body.post-type-archive-works .footer {
     color: #777;
     font-weight: 400;
 }
+
+
+/* =========================
+   Work Detail - Other Works
+========================= */
+
+.work-detail__other-works {
+    padding: 60px 0 100px;
+}
+
+.work-detail__other-works .container {
+    background: rgba(255, 255, 255, 0.86);
+    padding: 40px 0;
+}
+
+/* 見出し */
+.work-detail__other-title {
+    margin: 0 0 16px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.work-detail__other-title span {
+    color: #777;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 説明文 */
+.work-detail__other-description {
+    margin: 0 0 32px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 画像一覧 */
+.work-detail__other-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* 各画像 */
+.work-detail__other-item {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.work-detail__other-button {
+    position: relative;
+
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* サムネイル */
+.work-detail__other-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: top;
+}
+

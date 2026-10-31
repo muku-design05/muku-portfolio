@@ -16,6 +16,7 @@
             $design_point = get_field('design_point');
             $main_image   = get_field('main_image');
             $live_url     = get_field('live_url');
+            $is_fortune_web = (get_post_field('post_name', get_the_ID()) === 'web2026_01');
 
             $gallery_ids = get_post_meta(
                 get_the_ID(),
@@ -477,6 +478,77 @@
 
                     </div>
                 </section>
+
+                <?php if ($is_fortune_web) : ?>
+                <!-- Other Works -->
+                <section class="work-detail__other-works">
+                    <div class="container">
+                        <h2 class="work-detail__other-title">
+                            ✦ Related Works 
+                            <span>関連制作実績</span>
+                        </h2>
+
+                        <p class="work-detail__other-description">
+                            このほかにも、占い師や占術ごとの世界観に合わせた
+                            Webコンテンツのデザインを制作しています。
+                        </p>
+
+                        <?php
+                        $other_gallery_ids = get_post_meta(
+                            get_the_ID(),
+                            '_muku_other_works_gallery_ids',
+                            true
+                        );
+
+                        if (!is_array($other_gallery_ids)) {
+                            $other_gallery_ids = array();
+                        }
+                        ?>
+
+                        <?php if (!empty($other_gallery_ids)) : ?>
+                            <div class="work-detail__other-gallery">
+
+                                <?php foreach ($other_gallery_ids as $attachment_id) : ?>
+                                    <?php
+                                    $attachment_id = absint($attachment_id);
+
+                                    if (!wp_attachment_is_image($attachment_id)) {
+                                        continue;
+                                    }
+                                    ?>
+
+                                    <div class="work-detail__other-item">
+                                        <button
+                                            type="button"
+                                            class="work-detail__other-button"
+                                            data-full="<?php echo esc_url(
+                                                wp_get_attachment_image_url($attachment_id, 'full')
+                                            ); ?>"
+                                            aria-label="画像を拡大表示"
+                                        >
+                                            <?php
+                                            echo wp_get_attachment_image(
+                                                $attachment_id, 'full', false,
+                                                array(
+                                                    'class' => 'work-detail__other-image',
+                                                    'loading' => 'lazy',
+                                                )
+                                            );
+                                            ?>
+                                            <span class="work-detail__expand-icon" aria-hidden="true">
+                                                ⤢
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                <?php endforeach; ?>
+
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </section>
+            <?php endif; ?>
 
             </article>
 
