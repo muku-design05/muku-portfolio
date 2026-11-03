@@ -75,45 +75,94 @@
 
                 <div class="works-pickup">
 
-                    <a href="<?php echo esc_url(home_url('/works/#web')); ?>" class="work-card">
-                        <div class="work-card__image">
-                            <img
-                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-web.jpg'); ?>"
-                                alt="Web制作実績"
-                            >
-                            <span>WEB</span>
-                        </div>
-                    </a>
+                    <?php
+                    $works_categories = array(
+                        'web' => array(
+                            'label' => 'WEB',
+                            'alt'   => 'Web制作実績',
+                        ),
+                        'banner' => array(
+                            'label' => 'BANNER',
+                            'alt'   => 'バナー制作実績',
+                        ),
+                        'graphic' => array(
+                            'label' => 'GRAPHIC',
+                            'alt'   => 'グラフィック制作実績',
+                        ),
+                        'video' => array(
+                            'label' => 'VIDEO',
+                            'alt'   => '動画制作実績',
+                        ),
+                    );
 
-                    <a href="<?php echo esc_url(home_url('/works/#banner')); ?>" class="work-card">
-                        <div class="work-card__image">
-                            <img
-                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-banner.jpg'); ?>"
-                                alt="バナー制作実績"
-                            >
-                            <span>BANNER</span>
-                        </div>
-                    </a>
+                    foreach ($works_categories as $key => $category) :
 
-                    <a href="<?php echo esc_url(home_url('/works/#graphic')); ?>" class="work-card">
-                        <div class="work-card__image">
-                            <img
-                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-graphic.jpg'); ?>"
-                                alt="グラフィック制作実績"
-                            >
-                            <span>GRAPHIC</span>
-                        </div>
-                    </a>
+                        $image_ids = get_option(
+                            'muku_top_works_' . $key . '_ids',
+                            array()
+                        );
 
-                    <a href="<?php echo esc_url(home_url('/works/#video')); ?>" class="work-card">
-                        <div class="work-card__image">
-                            <img
-                                src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/works-video.jpg'); ?>"
-                                alt="動画制作実績"
-                            >
-                            <span>VIDEO</span>
-                        </div>
-                    </a>
+                        if (!is_array($image_ids)) {
+                            $image_ids = array();
+                        }
+
+                    ?>
+
+                        <a
+                            href="<?php echo esc_url(home_url('/works/#' . $key)); ?>"
+                            class="work-card"
+                        >
+                            <div class="work-card__image">
+
+                                <?php if (!empty($image_ids)) : ?>
+
+                                    <div class="work-card__slides">
+
+                                        <?php foreach ($image_ids as $index => $image_id) : ?>
+
+                                            <?php
+                                            $image_html = wp_get_attachment_image(
+                                                absint($image_id),
+                                                'large',
+                                                false,
+                                                array(
+                                                    'alt'   => $category['alt'],
+                                                    'class' => 'work-card__slide-image',
+                                                )
+                                            );
+
+                                            if (!$image_html) {
+                                                continue;
+                                            }
+                                            ?>
+
+                                            <div class="work-card__slide<?php echo $index === 0 ? ' is-active' : ''; ?>">
+                                                <?php echo $image_html; ?>
+                                            </div>
+
+                                        <?php endforeach; ?>
+
+                                    </div>
+
+                                <?php else : ?>
+
+                                    <img
+                                        src="<?php echo esc_url(
+                                            get_template_directory_uri() .
+                                            '/assets/images/works-' . $key . '.jpg'
+                                        ); ?>"
+                                        alt="<?php echo esc_attr($category['alt']); ?>"
+                                        class="work-card__slide-image"
+                                    >
+
+                                <?php endif; ?>
+
+                                <span><?php echo esc_html($category['label']); ?></span>
+
+                            </div>
+                        </a>
+
+                    <?php endforeach; ?>
 
                 </div>
 
@@ -161,21 +210,20 @@
 
                 <!-- Experience -->
                 <section class="about-block">
-                    
+
                     <h3 class="about-block__title">Experience</h3>
 
                     <div class="about-block__content">
                         <div class="about__experience">
-                            <p>2022 — 2025</p>
-                            <p>In-house Designer</p>
-                            <p>Web / Banner / Graphic</p>
-                            <p>/ Video</p>
+                            <p>2022.04 — 2025.07</p>
+                            <p>Webデザイナー</p>
+                            <p>Webサイト・バナー・販促物・動画制作など</p>
                         </div>
 
                         <div class="about__experience">
-                            <p>2025 — Present</p>
-                            <p>Digital Designer</p>
-                            <p>Web / App / Creative</p>
+                            <p>2025.09 — 現在</p>
+                            <p>Webデザイナー</p>
+                            <p>Webサイト・アプリ・バナー制作など</p>
                         </div>
                     </div>
                 </section>
@@ -184,18 +232,6 @@
                 <!-- Strength / Tools -->
                 <div class="about__side">
 
-                    <!-- Strength -->
-                    <section class="about-block">
-                        <h3 class="about-block__title">Strength</h3>
-
-                        <div class="about-block__content">
-                            <ul class="about-list">
-                                <li>Information Design</li>
-                                <li>Visual Communication</li>
-                                <li>Multi-format Creative</li>
-                            </ul>
-                        </div>
-                    </section>
 
 
                     <!-- Tools -->
@@ -219,6 +255,113 @@
 
             </div>
 
+            <!-- Skill Map / My Strengths -->
+            <div class="about__skills-grid">
+
+                <!-- Skill Map -->
+                <section class="about-block about-block--skillmap">
+
+                    <h3 class="about-block__title">Skill Map</h3>
+
+                    <div class="about-block__content">
+
+                        <button
+                            type="button"
+                            class="about__skillmap"
+                            aria-label="スキルマップを拡大表示"
+                            aria-haspopup="dialog"
+                        >
+                            <?php
+                            echo wp_get_attachment_image(
+                                130,
+                                'full',
+                                false,
+                                array(
+                                    'class' => 'about__skillmap-image',
+                                    'alt'   => '制作経験と今後広げたい領域を示したスキルマップ',
+                                )
+                            );
+                            ?>
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <!-- Skill Map Modal -->
+                <div
+                    class="skillmap-modal"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="スキルマップの拡大表示"
+                    aria-hidden="true"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="skillmap-modal__close"
+                        aria-label="閉じる"
+                    >
+                        ×
+                    </button>
+
+                    <div class="skillmap-modal__inner">
+                        <?php
+                        echo wp_get_attachment_image(
+                            130,
+                            'full',
+                            false,
+                            array(
+                                'class' => 'skillmap-modal__image',
+                                'alt'   => '制作経験と今後広げたい領域を示したスキルマップ',
+                            )
+                        );
+                        ?>
+                    </div>
+                </div>
+
+            <!-- My Strengths -->
+            <section class="about-block about-block--strengths">
+                <h3 class="about-block__title">My Strengths</h3>
+
+                <div class="about-block__content">
+                    <div class="about__strengths">
+
+                        <div class="about__strength">
+                            <h4 class="about__strength-title">01. 情報設計・伝達力</h4>
+                            <p class="about__strength-text">
+                                Webサイトやバナー、販促物、動画など、さまざまな媒体の制作に携わってきました。
+                                制作では、伝えたい情報を整理し、何を優先して見せるべきかを考えることを大切に
+                                しています。文字量やレイアウト、表現方法を工夫し、見る人にとって分かりやすい
+                                デザインを心がけています。
+                            </p>
+                        </div>
+
+                        <div class="about__strength">
+                            <h4 class="about__strength-title">02. 表現設計・提案力</h4>
+                            <p class="about__strength-text">
+                                制作物の目的やターゲットに合わせて、配色や書体、素材などを選んできました。
+                                販促フライヤーでは、情報を詰め込むのではなく、文章を減らしてイラストで
+                                伝える方法を提案。実際に採用され、制作に反映されました。
+                            </p>
+                        </div>
+
+                        <div class="about__strength">
+                            <h4 class="about__strength-title">03. 適応力・学習意欲</h4>
+                            <p class="about__strength-text">
+                                前職ではグラフィックや動画制作を幅広く経験し、
+                                現職ではWebサイトやアプリのデザインを担当しています。
+                                制作する媒体や求められる表現が変わっても、必要な知識や
+                                技術を学びながら対応してきました。現在はWordPressを学び、
+                                自身のポートフォリオサイトも制作しています。
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /.about__skills-grid -->
 
             <!-- Explorations -->
             <section class="about-block about-block--explorations">

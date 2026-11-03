@@ -410,9 +410,12 @@ body.home main {
 
 .works-pickup {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
     width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
 }
 
 .work-card {
@@ -443,18 +446,21 @@ body.home main {
 }
 
 .work-card__image img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    object-fit: contain;
+    background: #fff;
 }
+
+
 
 .work-card__image span {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 3;
     color: #fff;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -468,9 +474,11 @@ body.home main {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 2;
     background: rgba(26, 26, 26, 0.8);
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 
@@ -484,7 +492,9 @@ body.home main {
 }
 
 .works-link {
-    margin-top: 48px;
+    width: 100%;
+    max-width: 650px;
+    margin: 48px auto 0;
     text-align: right;
 }
 
@@ -501,6 +511,33 @@ body.home main {
     color: #fff;
 }
 
+
+/* トップWorks：スライドショー */
+.work-card__slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.work-card__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    background: #fff;
+}
+
+.work-card__slide.is-active {
+    opacity: 1;
+}
+
+.work-card__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #fff;
+}
 
 /* =========================
    About
@@ -556,6 +593,205 @@ body.home main {
     font-size: 30px;
     line-height: 1;
     text-align: center;
+}
+
+/* =========================
+   About - Skill Map
+========================= */
+
+.about__skillmap {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.about__skillmap-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+/* =========================
+   Skill Map - Modal
+========================= */
+
+/* 通常表示のボタン */
+.about__skillmap {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.about__skillmap-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* モーダル全体 */
+.skillmap-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    overflow-y: auto;
+}
+
+/* hidden属性を優先 */
+.skillmap-modal[hidden] {
+    display: none;
+}
+
+/* モーダル内部 */
+.skillmap-modal__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+
+/* 拡大画像 */
+.skillmap-modal__image {
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 75vh;
+    height: auto;
+    object-fit: contain;
+    touch-action: none;
+}
+
+/* 閉じるボタン */
+.skillmap-modal__close {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 10000;
+
+    display: block;
+    width: auto;
+    height: auto;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    mix-blend-mode: difference;
+}
+
+/* スマホ表示 */
+@media screen and (max-width: 767px) {
+    .skillmap-modal {
+        padding: 16px;
+    }
+
+    .skillmap-modal__image {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+
+
+}
+
+/* =========================
+   About - Skills Grid
+========================= */
+
+.about__skills-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 40px;
+    align-items: start;
+}
+
+.about__skills-grid > .about-block {
+    min-width: 0;
+}
+
+/* スマホでは縦並び */
+@media screen and (max-width: 767px) {
+    .about__skills-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+}
+
+/* =========================
+   About - My Strengths
+========================= */
+
+.about__strengths {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.about__strength {
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.about__strength:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.about__strength-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.about__strength-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+}
+
+/* スマホ表示 */
+@media screen and (max-width: 767px) {
+    .about__strengths {
+        gap: 24px;
+    }
+
+    .about__strength {
+        padding-bottom: 20px;
+    }
+
+    .about__strength-title {
+        font-size: 17px;
+    }
+
+    .about__strength-text {
+        font-size: 14px;
+        line-height: 1.8;
+    }
 }
 
 

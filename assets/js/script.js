@@ -226,6 +226,251 @@ if (
 
 
 /* =========================
+   Skill Map Modal
+========================= */
+
+const skillmapButton = document.querySelector(".about__skillmap");
+const skillmapModal = document.querySelector(".skillmap-modal");
+const skillmapModalClose = document.querySelector(".skillmap-modal__close");
+
+if (skillmapButton && skillmapModal && skillmapModalClose) {
+    document.body.appendChild(skillmapModal);
+
+    let previousFocus = null;
+
+    function closeSkillmapModal() {
+        skillmapModal.hidden = true;
+        skillmapModal.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+
+        if (previousFocus) {
+            previousFocus.focus();
+        }
+    }
+
+    // モーダルを開く
+    skillmapButton.addEventListener("click", () => {
+        previousFocus = document.activeElement;
+
+        skillmapModal.hidden = false;
+        skillmapModal.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+
+        skillmapModalClose.focus();
+    });
+
+    // 閉じるボタン
+    skillmapModalClose.addEventListener("click", closeSkillmapModal);
+
+    // 背景クリックで閉じる
+    skillmapModal.addEventListener("click", (e) => {
+        if (
+            e.target === skillmapModal ||
+            e.target.classList.contains("skillmap-modal__inner")
+        ) {
+            closeSkillmapModal();
+        }
+    });
+
+    // Escapeキーで閉じる
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !skillmapModal.hidden) {
+            closeSkillmapModal();
+        }
+    });
+
+    // モーダル内でTabキーを押した際、フォーカスが外へ移動しないようにする
+    skillmapModal.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab") return;
+
+        e.preventDefault();
+        skillmapModalClose.focus();
+    });
+}
+
+
+/* =========================
+   Skill Map Modal Pinch Zoom
+========================= */
+
+const skillmapModalImage = document.querySelector(
+    ".skillmap-modal__image"
+);
+
+if (skillmapModal && skillmapModalImage) {
+
+    let scale = 1;
+    let startScale = 1;
+    let startDistance = 0;
+
+    let translateX = 0;
+    let translateY = 0;
+
+    let startTranslateX = 0;
+    let startTranslateY = 0;
+
+    let startCenterX = 0;
+    let startCenterY = 0;
+
+    let isDragging = false;
+
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    let dragStartTranslateX = 0;
+    let dragStartTranslateY = 0;
+
+    const getTouchDistance = (touches) => {
+        const x = touches[0].clientX - touches[1].clientX;
+        const y = touches[0].clientY - touches[1].clientY;
+
+        return Math.hypot(x, y);
+    };
+
+    const getTouchCenter = (touches) => {
+        return {
+            x: (touches[0].clientX + touches[1].clientX) / 2,
+            y: (touches[0].clientY + touches[1].clientY) / 2
+        };
+    };
+
+    const updateTransform = () => {
+        skillmapModalImage.style.transform =
+            `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    };
+
+    const resetZoom = () => {
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        isDragging = false;
+
+        updateTransform();
+    };
+
+    // モーダルを開くたびに拡大率をリセット
+    skillmapButton.addEventListener("click", resetZoom);
+
+    // モーダルを閉じたときもリセット
+    skillmapModalClose.addEventListener("click", resetZoom);
+
+    skillmapModal.addEventListener("touchstart", (e) => {
+
+        // 拡大中は1本指で画像を移動
+        if (
+            e.touches.length === 1 &&
+            scale > 1 &&
+            e.target === skillmapModalImage
+        ) {
+            isDragging = true;
+
+            dragStartX = e.touches[0].clientX;
+            dragStartY = e.touches[0].clientY;
+
+            dragStartTranslateX = translateX;
+            dragStartTranslateY = translateY;
+
+            return;
+        }
+
+        // 2本指でピンチ操作
+        if (e.touches.length !== 2) return;
+
+        isDragging = false;
+
+        startDistance = getTouchDistance(e.touches);
+        startScale = scale;
+
+        startTranslateX = translateX;
+        startTranslateY = translateY;
+
+        const center = getTouchCenter(e.touches);
+
+        startCenterX = center.x;
+        startCenterY = center.y;
+
+    }, { passive: true });
+
+    skillmapModal.addEventListener("touchmove", (e) => {
+
+        // 1本指でドラッグ
+        if (
+            e.touches.length === 1 &&
+            isDragging &&
+            scale > 1
+        ) {
+            e.preventDefault();
+
+            translateX =
+                dragStartTranslateX +
+                (e.touches[0].clientX - dragStartX);
+
+            translateY =
+                dragStartTranslateY +
+                (e.touches[0].clientY - dragStartY);
+
+            updateTransform();
+            return;
+        }
+
+        if (e.touches.length !== 2) return;
+
+        e.preventDefault();
+
+        // 拡大・縮小（1〜4倍）
+        const currentDistance = getTouchDistance(e.touches);
+
+        if (startDistance === 0) return;
+
+        scale = startScale * (currentDistance / startDistance);
+        scale = Math.min(Math.max(scale, 1), 4);
+
+        // 2本指の移動
+        const center = getTouchCenter(e.touches);
+
+        translateX =
+            startTranslateX + (center.x - startCenterX);
+
+        translateY =
+            startTranslateY + (center.y - startCenterY);
+
+        // 等倍に戻ったら位置もリセット
+        if (scale === 1) {
+            translateX = 0;
+            translateY = 0;
+        }
+
+        updateTransform();
+
+    }, { passive: false });
+
+    skillmapModal.addEventListener("touchend", () => {
+        isDragging = false;
+    });
+
+    skillmapModal.addEventListener("touchcancel", () => {
+        isDragging = false;
+    });
+
+    // 背景クリックやEscキーで閉じた場合もリセット
+    const observer = new MutationObserver(() => {
+        if (skillmapModal.hidden) {
+            resetZoom();
+        }
+    });
+
+    observer.observe(skillmapModal, {
+        attributes: true,
+        attributeFilter: ["hidden"]
+    });
+}
+
+
+/* =========================
 Work Detail Accordion
 ========================= */
 

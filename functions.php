@@ -674,3 +674,369 @@ add_action('wp_enqueue_scripts', function () {
 
 // 大きな画像の自動縮小を無効化
 add_filter('big_image_size_threshold', '__return_false');
+
+
+/* =========================
+   Top Works Slideshow Settings
+========================= */
+
+// 管理画面に「トップWorks設定」を追加
+function muku_add_top_works_settings_page() {
+
+    add_menu_page(
+        'トップWorks設定',
+        'トップWorks設定',
+        'manage_options',
+        'muku-top-works',
+        'muku_render_top_works_settings_page',
+        'dashicons-images-alt2',
+        25
+    );
+
+}
+add_action('admin_menu', 'muku_add_top_works_settings_page');
+
+
+// トップWorks設定画面の表示
+function muku_render_top_works_settings_page() {
+
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    // 画像IDの保存処理
+    if (
+        isset($_SERVER['REQUEST_METHOD']) &&
+        $_SERVER['REQUEST_METHOD'] === 'POST'
+    ) {
+
+        check_admin_referer(
+            'muku_save_top_works',
+            'muku_top_works_nonce'
+        );
+
+        $save_categories = array(
+            'web',
+            'banner',
+            'graphic',
+            'video',
+        );
+
+        foreach ($save_categories as $category) {
+
+            $field_name = 'muku_top_works_' . $category . '_ids';
+
+            $raw_ids = isset($_POST[$field_name])
+                ? sanitize_text_field(wp_unslash($_POST[$field_name]))
+                : '';
+
+            $ids = array_filter(
+                array_map('absint', explode(',', $raw_ids))
+            );
+
+            // 重複を除いて保存
+            $ids = array_values(array_unique($ids));
+
+            update_option(
+                'muku_top_works_' . $category . '_ids',
+                $ids
+            );
+        }
+
+        echo '<div class="notice notice-success is-dismissible"><p>設定を保存しました。</p></div>';
+    }
+
+    $categories = array(
+        'web'     => 'WEB',
+        'banner'  => 'BANNER',
+        'graphic' => 'GRAPHIC',
+        'video'   => 'VIDEO',
+    );
+
+    ?>
+
+    <div class="wrap">
+        <h1>トップWorks設定</h1>
+
+        <p>
+            トップページのWorksに表示する画像を管理します。<br>
+            カテゴリーごとに好きな枚数の画像を登録できます。
+        </p>
+
+        <form method="post" id="muku-top-works-form">
+
+            <?php wp_nonce_field(
+                'muku_save_top_works',
+                'muku_top_works_nonce'
+            ); ?>
+
+            <?php foreach ($categories as $key => $label) : ?>
+
+                <?php
+                $saved_ids = get_option(
+                    'muku_top_works_' . $key . '_ids',
+                    array()
+                );
+
+                if (!is_array($saved_ids)) {
+                    $saved_ids = array();
+                }
+                ?>
+
+                <div
+                    class="muku-top-works-category"
+                    data-category="<?php echo esc_attr($key); ?>"
+                    style="background: #fff; padding: 24px; margin: 24px 0; border: 1px solid #ddd;"
+                >
+
+                    <h2><?php echo esc_html($label); ?></h2>
+
+                    <p>
+                        スライドショーに表示する画像を登録します。<br>
+                        画像はドラッグ＆ドロップで並び替えられるようにします。
+                    </p>
+
+                    <input
+                        type="hidden"
+                        name="muku_top_works_<?php echo esc_attr($key); ?>_ids"
+                        class="muku-top-works-ids"
+                        value="<?php echo esc_attr(implode(',', $saved_ids)); ?>"
+                    >
+
+                    <ul
+                        class="muku-top-works-list"
+                        style="display: flex; flex-wrap: wrap; gap: 16px; padding: 0;"
+                    >
+                        <?php foreach ($saved_ids as $image_id) : ?>
+
+                            <?php
+                            $image_url = wp_get_attachment_image_url(
+                                $image_id,
+                                'thumbnail'
+                            );
+
+                            if (!$image_url) {
+                                continue;
+                            }
+                            ?>
+
+                            <li
+                                data-id="<?php echo esc_attr($image_id); ?>"
+                                style="width: 140px; padding: 8px; border: 1px solid #ddd; background: #f9f9f9; cursor: move; list-style: none;"
+                            >
+                                <img
+                                    src="<?php echo esc_url($image_url); ?>"
+                                    alt=""
+                                    style="width: 100%; height: 100px; object-fit: contain;"
+                                >
+
+                                <button
+                                    type="button"
+                                    class="button muku-top-works-remove"
+                                    style="display: block; margin-top: 8px;"
+                                >
+                                    削除
+                                </button>
+                            </li>
+
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="button button-primary muku-top-works-add"
+                    >
+                        ＋ 画像を追加
+                    </button>
+
+                </div>
+
+            <?php endforeach; ?>
+
+            <p class="submit">
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    変更を保存
+                </button>
+            </p>
+
+        </form>
+    </div>
+
+    <?php
+}
+
+
+/* =========================
+   Top Works Media Library
+========================= */
+
+// トップWorks設定画面でメディアライブラリを使用
+function muku_top_works_admin_scripts($hook) {
+
+    if ($hook !== 'toplevel_page_muku-top-works') {
+        return;
+    }
+
+    wp_enqueue_media();
+
+    wp_enqueue_script('jquery-ui-sortable');
+
+    wp_add_inline_script(
+        'jquery-ui-sortable',
+        <<<'JS'
+jQuery(function ($) {
+
+    // 画像IDを隠しフィールドに反映
+    function updateImageIds($category) {
+
+        const ids = [];
+
+        $category.find('.muku-top-works-list li').each(function () {
+            ids.push($(this).data('id'));
+        });
+
+        $category.find('.muku-top-works-ids').val(ids.join(','));
+    }
+
+    // メディアライブラリを開く
+    $('.muku-top-works-add').on('click', function () {
+
+        const $category = $(this).closest('.muku-top-works-category');
+
+        const frame = wp.media({
+            title: 'スライドショーの画像を選択',
+            button: {
+                text: '選択した画像を追加'
+            },
+            library: {
+                type: 'image'
+            },
+            multiple: true
+        });
+
+        frame.on('select', function () {
+
+            const attachments = frame.state().get('selection').toJSON();
+
+            attachments.forEach(function (attachment) {
+
+                // 同じ画像の重複登録を防ぐ
+                if (
+                    $category.find(
+                        '.muku-top-works-list li[data-id="' + attachment.id + '"]'
+                    ).length
+                ) {
+                    return;
+                }
+
+                const imageUrl =
+                    attachment.sizes?.thumbnail?.url || attachment.url;
+
+                const $item = $('<li>', {
+                    'data-id': attachment.id,
+                    css: {
+                        width: '140px',
+                        padding: '8px',
+                        border: '1px solid #ddd',
+                        background: '#f9f9f9',
+                        cursor: 'move',
+                        listStyle: 'none'
+                    }
+                });
+
+                const $image = $('<img>', {
+                    src: imageUrl,
+                    alt: '',
+                    css: {
+                        width: '100%',
+                        height: '100px',
+                        objectFit: 'contain'
+                    }
+                });
+
+                const $remove = $('<button>', {
+                    type: 'button',
+                    class: 'button',
+                    text: '削除',
+                    css: {
+                        display: 'block',
+                        marginTop: '8px'
+                    }
+                });
+
+                $remove.on('click', function () {
+                    $item.remove();
+                    updateImageIds($category);
+                });
+
+                $item.append($image, $remove);
+
+                $category.find('.muku-top-works-list').append($item);
+            });
+
+            updateImageIds($category);
+        });
+
+        frame.open();
+    });
+
+    // 保存済み画像の削除
+    $('.muku-top-works-list').on(
+        'click',
+        '.muku-top-works-remove',
+        function () {
+
+            const $category = $(this).closest(
+                '.muku-top-works-category'
+            );
+
+            $(this).closest('li').remove();
+
+            updateImageIds($category);
+        }
+    );
+
+    // ドラッグ＆ドロップで並び替え
+    $('.muku-top-works-list').sortable({
+        items: 'li',
+        tolerance: 'pointer',
+        update: function () {
+            updateImageIds(
+                $(this).closest('.muku-top-works-category')
+            );
+        }
+    });
+
+});
+JS,
+        'after'
+    );
+}
+add_action('admin_enqueue_scripts', 'muku_top_works_admin_scripts');
+
+
+/* =========================
+   Top Works Slideshow Script
+========================= */
+
+function muku_enqueue_top_works_slideshow() {
+
+    if (!is_front_page()) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'muku-top-works-slideshow',
+        get_template_directory_uri() . '/assets/js/top-works-slideshow.js',
+        array(),
+        filemtime(
+            get_template_directory() . '/assets/js/top-works-slideshow.js'
+        ),
+        true
+    );
+
+}
+add_action('wp_enqueue_scripts', 'muku_enqueue_top_works_slideshow');
