@@ -581,8 +581,8 @@ body.home main {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    font-size: 50px;
-    font-weight: 500;
+    font-size: 40px;
+    font-weight: 400;
 }
 
 .about-block__title::before {
@@ -594,6 +594,18 @@ body.home main {
     line-height: 1;
     text-align: center;
 }
+
+
+.about-block__title-ja {
+    margin-left: 12px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: #777;
+}
+
 
 /* =========================
    About - Skill Map
@@ -745,20 +757,27 @@ body.home main {
 ========================= */
 
 .about__strengths {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    row-gap: 36px;
+    align-items: start;
+    text-align: left;
 }
 
+
+
+
 .about__strength {
-    padding-bottom: 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .about__strength:last-child {
     padding-bottom: 0;
     border-bottom: none;
 }
+
 
 .about__strength-title {
     margin: 0 0 12px;
@@ -777,8 +796,10 @@ body.home main {
 /* スマホ表示 */
 @media screen and (max-width: 767px) {
     .about__strengths {
+        grid-template-columns: 1fr;
         gap: 24px;
     }
+
 
     .about__strength {
         padding-bottom: 20px;
@@ -832,12 +853,15 @@ body.home main {
 
 /* ===== Experience / Strength / Tools ===== */
 
+
 .about__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 80px;
+    row-gap: 50px;
     margin-bottom: 50px;
 }
+
 
 .about__side {
     display: flex;
@@ -855,6 +879,23 @@ body.home main {
     margin-bottom: 10px;
     font-size: 20px;
     line-height: 1.5;
+}
+
+
+
+/* Experience内の行間 */
+.about__experience p {
+    margin-bottom: 5px;
+}
+
+/* 年号 */
+.about__experience-date {
+    font-weight: 300;
+}
+
+/* 社名 */
+.about__experience .about__experience-company {
+    font-size: 25px;
 }
 
 

@@ -188,9 +188,13 @@
 
             <div class="about__body">
 
+                <div class="about__grid">
                 <!-- About Me -->
                 <section class="about-block about-block--profile">
-                    <h3 class="about-block__title">About me</h3>
+                    <h3 class="about-block__title">
+                        About me
+                        <span class="about-block__title-ja">自己紹介</span>
+                    </h3>
 
                     <div class="about-block__content about__profile-text">
                         <p class="about__name">
@@ -205,38 +209,44 @@
             </section>
 
 
-            <!-- Experience / Strength / Tools -->
-            <div class="about__grid">
+            
 
                 <!-- Experience -->
                 <section class="about-block">
 
-                    <h3 class="about-block__title">Experience</h3>
+                    <h3 class="about-block__title">
+                        Experience
+                        <span class="about-block__title-ja">経歴</span>
+                    </h3>
 
                     <div class="about-block__content">
-                        <div class="about__experience">
-                            <p>2022.04 — 2025.07</p>
-                            <p>Webデザイナー</p>
-                            <p>Webサイト・バナー・販促物・動画制作など</p>
-                        </div>
+                        
+                    <div class="about__experience">
+                        <p class="about__experience-date">2022.04 — 2025.07</p>
+                        <p class="about__experience-company">株式会社ADI.G</p>
+                        <p>Webデザイナー</p>
+                        <p>バナー・販促物・動画制作、Webサイト更新など</p>
+                    </div>
 
-                        <div class="about__experience">
-                            <p>2025.09 — 現在</p>
-                            <p>Webデザイナー</p>
-                            <p>Webサイト・アプリ・バナー制作など</p>
-                        </div>
+                    <div class="about__experience">
+                        <p class="about__experience-date">2025.09 — 現在</p>
+                        <p class="about__experience-company">株式会社レンサ</p>
+                        <p>Webデザイナー</p>
+                        <p>Webサイト・アプリのデザイン、バナー制作など</p>
+                    </div>
+
+
+
                     </div>
                 </section>
 
 
-                <!-- Strength / Tools -->
-                <div class="about__side">
-
-
-
-                    <!-- Tools -->
-                    <section class="about-block">
-                        <h3 class="about-block__title">Tools</h3>
+                <!-- Tools -->
+                <section class="about-block">
+                        <h3 class="about-block__title">
+                            Tools
+                            <span class="about-block__title-ja">使用ツール</span>
+                        </h3>
 
                         <div class="about-block__content">
                             <ul class="about-tools">
@@ -251,17 +261,16 @@
                         </div>
                     </section>
 
-                </div>
+                
 
-            </div>
-
-            <!-- Skill Map / My Strengths -->
-            <div class="about__skills-grid">
 
                 <!-- Skill Map -->
                 <section class="about-block about-block--skillmap">
 
-                    <h3 class="about-block__title">Skill Map</h3>
+                    <h3 class="about-block__title">
+                        Skill Map
+                        <span class="about-block__title-ja">スキルマップ</span>
+                    </h3>
 
                     <div class="about-block__content">
 
@@ -319,10 +328,14 @@
                         ?>
                     </div>
                 </div>
+            </div><!-- /.about__grid -->
 
             <!-- My Strengths -->
             <section class="about-block about-block--strengths">
-                <h3 class="about-block__title">My Strengths</h3>
+                <h3 class="about-block__title">
+                    My Strengths
+                    <span class="about-block__title-ja">私の強み</span>
+                </h3>
 
                 <div class="about-block__content">
                     <div class="about__strengths">
@@ -337,35 +350,59 @@
                             </p>
                         </div>
 
+                        
                         <div class="about__strength">
                             <h4 class="about__strength-title">02. 表現設計・提案力</h4>
                             <p class="about__strength-text">
-                                制作物の目的やターゲットに合わせて、配色や書体、素材などを選んできました。
-                                販促フライヤーでは、情報を詰め込むのではなく、文章を減らしてイラストで
-                                伝える方法を提案。実際に採用され、制作に反映されました。
+                                制作物の目的やターゲットを踏まえ、配色・書体・素材選定からレイアウトまで、
+                                主体的に考え制作を進めてきました。媒体に応じた表現方法を検討し、
+                                必要に応じて改善提案も行っています。
+                                <br><br>
+                                販促フライヤーでは、文章量を減らしイラストで伝える方法を提案し、
+                                実際に採用されました。また、動画制作では構成検討から素材の準備、
+                                撮影・編集まで一貫して担当。幅広い制作経験を活かし、
+                                目的に合った表現を考え、形にすることを強みとしています。
                             </p>
                         </div>
 
                         <div class="about__strength">
-                            <h4 class="about__strength-title">03. 適応力・学習意欲</h4>
+                            <h4 class="about__strength-title">03. 課題発見・連携力</h4>
+                            <p class="about__strength-text">
+                                歯科医院向けの操作説明動画では、初心者が理解しやすい内容にするため、
+                                当初の制作指示だけでは説明が不十分になると考え、
+                                ディレクターに改善と工数の追加を提案しました。
+                                <br><br>
+                                制作では実際に製品を操作し、疑問点や分かりにくい箇所を確認。
+                                営業担当者と説明内容をすり合わせながら、文章やアニメーション表現を調整し、
+                                関係者と連携して制作を進めました。
+                            </p>
+                        </div>
+
+                        <div class="about__strength">
+                            <h4 class="about__strength-title">04. 適応力・学習意欲</h4>
                             <p class="about__strength-text">
                                 前職ではグラフィックや動画制作を幅広く経験し、
                                 現職ではWebサイトやアプリのデザインを担当しています。
                                 制作する媒体や求められる表現が変わっても、必要な知識や
-                                技術を学びながら対応してきました。現在はWordPressを学び、
-                                自身のポートフォリオサイトも制作しています。
+                                技術を学びながら対応してきました。
+                                <br><br>
+                                現在はWordPressや生成AIを活用したWebサイト制作にも取り組み、
+                                自身のポートフォリオサイトをオリジナルテーマで制作しています。
                             </p>
                         </div>
+
 
                     </div>
                 </div>
             </section>
 
-        </div><!-- /.about__skills-grid -->
 
             <!-- Explorations -->
             <section class="about-block about-block--explorations">
-                <h3 class="about-block__title">Explorations</h3>
+                <h3 class="about-block__title">
+                    Explorations
+                    <span class="about-block__title-ja">自主制作</span>
+                </h3>
 
                 <div class="about-block__content">
                     <div class="explorations">
